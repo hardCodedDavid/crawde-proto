@@ -121,13 +121,11 @@
         <!--end footer-->
     </div>
 
-
-
 <script>
 
 $(document).ready(function () {
     // Establish WebSocket connection
-    const socket = new WebSocket("ws://localhost:6789");
+    const socket = new WebSocket("wss://ws.itrustinvestment.com");
 
     // Listen for WebSocket events
     socket.onmessage = function (event) {
