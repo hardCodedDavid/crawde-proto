@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('symbol')->unique();
             $table->string('name');
             $table->text('slug');
-            $table->text('img')->default('https://pngimg.com/d/dollar_sign_PNG35.png');
+            $table->text('img');
             $table->decimal('price', 15, 8)->nullable(); // Field for "11"
             $table->decimal('change_15m', 15, 8)->nullable(); // Field for "0"
             $table->decimal('change_1d', 15, 8)->nullable(); // Field for "1"
