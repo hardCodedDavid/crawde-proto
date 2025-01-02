@@ -39,7 +39,7 @@ class CoinSeeder extends Seeder
                         'marketcap' => $metrics[40] ?? 0,
                         'btc_correlation_1d' => $metrics[42],
                         'eth_correlation_1d' => $metrics[43],
-                        'open_interest' => $metrics[10] ?? null,
+                        'open_interest' => $metrics[10][1] ?? null,
                     ]
                 );
             }
