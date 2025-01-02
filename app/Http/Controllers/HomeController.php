@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Coin;
 use App\Models\News;
 use App\Models\Crypto;
 use Illuminate\View\View;
@@ -12,10 +13,10 @@ class HomeController extends Controller
 {
     public function index(Request $request): View
     {
-        $crypto = Crypto::where('status', 'active')
-            ->orderBy('market_cap', 'desc')
-            ->take(50) // or ->limit(50)
-            ->get();
+        $crypto = Coin::where('symbol', 'like', '%T') // Filter symbols ending with 'T'
+        ->orderBy('marketcap', 'desc')
+        ->take(50) // or ->limit(50)
+        ->get();
 
         return view('user.dashboard', [
             'user' => $request->user(),

@@ -35,7 +35,7 @@
                                     <div class="col-12 mb-1">
                                         <div class="d-flex align-items-center">
                                             <div class="position-relative">
-                                                <img src="{{ $crypto->img }}" alt="" class="rounded-circle thumb-lg">
+                                                <img src="{{ $crypto->img }}" alt="" class="rounded-circle thumb-lg border border-1 border-white">
                                                 <div class="position-absolute top-50 start-100 translate-middle">
                                                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Flag_of_the_United_States.png/1200px-Flag_of_the_United_States.png" alt="" class="rounded-circle thumb-sm border border-2 border-white">
                                                 </div>
