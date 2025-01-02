@@ -28,7 +28,7 @@ return new class extends Migration
             $table->decimal('oi_change_1d', 15, 8)->nullable(); // Field for "7"
             $table->decimal('oi_change_1h', 15, 8)->nullable(); // Field for "8"
             $table->decimal('oi_change_8h', 15, 8)->nullable(); // Field for "9"
-            $table->decimal('open_interest', 15, 8)->nullable(); // Field for "10" (Array)
+            $table->decimal('open_interest', 20, 8)->nullable(); // Field for "10" (Array)
             $table->decimal('volatility_15m', 15, 8)->nullable(); // Field for "12"
             $table->decimal('volatility_1h', 15, 8)->nullable(); // Field for "13"
             $table->decimal('volatility_5m', 15, 8)->nullable(); // Field for "14"
