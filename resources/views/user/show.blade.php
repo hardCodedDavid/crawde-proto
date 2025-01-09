@@ -37,7 +37,7 @@
                                             <div class="position-relative">
                                                 <img src="{{ $crypto->img }}" alt="" class="rounded-circle thumb-lg border border-1 border-white">
                                                 <div class="position-absolute top-50 start-100 translate-middle">
-                                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Flag_of_the_United_States.png/1200px-Flag_of_the_United_States.png" alt="" class="rounded-circle thumb-sm border border-2 border-white">
+                                                    <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="" class="rounded-circle thumb-sm border border-2 border-white bg-white">
                                                 </div>
                                             </div>
                                             <div class="flex-grow-1 text-truncate ms-3"> 
@@ -48,53 +48,55 @@
                                     </div>
                                     <div class="col-12 my-2">
                                         <div class="d-flex">
-                                            <h2 class="fw-bold fs-24">
+                                            <h2 class="fw-bold fs-24 crypto-price"  data-price="{{ $crypto->price }}">
                                                 ${{ number_format(floor($crypto->price), 0) }}.<span class="fs-15 text-muted fw-normal">
                                                 {{ substr(number_format($crypto->price, 2), -2) }}
                                                 </span>
                                             </h2>
-                                            <span class="fs-11 {{ $crypto->changes_percentage > 0 ? 'text-primary' : ($crypto->changes_percentage < 0 ? 'text-danger' : 'text-dark') }} fw-normal mx-1">{{number_format($crypto->changes_percentage, 2)}}%</span>
+                                            <span class="fs-11 {{ $crypto->change_15m > 0 ? 'text-primary' : ($crypto->change_15m < 0 ? 'text-danger' : 'text-dark') }} fw-normal mx-1">{{number_format($crypto->change_15m, 2)}}%</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-between fw-semibold align-items-center">
                                 <p class="mb-1 d-inline-flex align-items-center"><i class="iconoir-task-list fs-18 text-muted me-1"></i>Average</p>
-                                <small class="text-end text-body-emphasis d-block ms-auto">90%</small>
+                                <small class="text-end text-body-emphasis d-block ms-auto">44%</small>
                             </div>
                             <div class="progress bg-primary-subtle" style="height:5px;">
                                 <div class="progress-bar bg-primary rounded-pill" role="progressbar" style="margin-right:2px; width: 20%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
                                 <div class="progress-bar bg-primary rounded-pill" role="progressbar" style="margin-right:2px; width: 20%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
                                 <div class="progress-bar bg-primary rounded-pill" role="progressbar" style="margin-right:2px; width: 1%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
-                            <div class="row my-3 align-items-center">
+                            <div class="row my-2 align-items-center">
                                 <div class="col-6">
                                     <div class="text-start my-1">
                                         <p class="mb-0 fs-10 text-muted">Market Cap</p>  
-                                        <h5 class="fs-16 fw-bold mb-0 p-0">${{ formatMarketCap($crypto->market_cap, 2) }}</h5>                                      
-                                    </div>
-                                    <div class="img-group d-flex my-3">
-                                        <a class="user-avatar position-relative d-inline-block" href="#">
-                                            <img src="https://seeklogo.com/images/B/binance-coin-bnb-logo-CD94CC6D31-seeklogo.com.png" alt="avatar" class="thumb-sm shadow-sm rounded-circle border border-1 border-white">
-                                        </a>
-                                        <a class="user-avatar position-relative d-inline-block ms-n2" href="#">
-                                            <img src="https://elitecurrensea.com/wp-content/uploads/2019/11/512x512_9ZCCQMS.png" alt="avatar" class="thumb-sm shadow-sm rounded-circle border border-1 border-white">
-                                        </a>               
+                                        <h5 class="fs-16 fw-bold mb-0 p-0">${{ formatMarketCap($crypto->marketcap, 2) }}</h5>                                      
                                     </div>
                                 </div>
                                 <div class="col-6 text-end align-self-center">
                                     <div class="my-1">
-                                        <h6 class="fw-normal text-muted fs-10 m-0">Average:</h6> <span class="text-dark fw-semibold fs-16 my-2">${{ number_format($crypto->price_avg_50, 2) }}</span> 
-                                    </div>
-                                    <div class="my-3">
-                                        <h6 class="fw-normal text-muted fs-10 m-0">Volume(24h):</h6> <span class="text-dark fw-semibold fs-16">${{ formatMarketCap($crypto->volume, 2) }}</span>
+                                        <h6 class="fw-normal text-muted fs-10 m-0">Volume:</h6> <span class="text-dark fw-semibold fs-16">${{ formatMarketCap($crypto->volume, 2) }}</span>
                                     </div>
                                 </div><!--end col-->
                             </div>
+                            <div class="">
+                                <div class="">
+                                    <div class="row d-flex justify-content-center">
+                                        <div class="col">
+                                            <p id="summary-car" class="truncate-3-line p-2 border-white border-opacity-25 border-dashed bg-dark-subtle rounded text-muted fs-12">
+                                                {{ truncateWords($summary, 20, '...') }}
+                                            </p>
+                                        </div>
+                                    </div>                             
+                                </div> 
+                            </div>
                             <!--end row-->
-                            <span class="badge rounded text-primary bg-primary-subtle w-100 btn-lg fs-14 fw-bold mt-0 py-2">
-                                Strong Buy 
-                            </span>
+                            <div id="action-btn">
+                                <span class="badge rounded text-dark bg-light-subtle w-100 btn-lg fs-14 fw-bold mt-2 py-2">
+                                    <div class="spinner-border spinner-border-sm text-secondary" role="status"></div> 
+                                </span>
+                            </div>
                         </div>
                         <!--end card-body-->
                     </div>
@@ -108,10 +110,10 @@
                                     <h4 class="card-title">Market Overview</h4>
                                 </div>
                                 <div class="col-auto">
-                                    <div class="dropdown">
+                                    <!-- <div class="dropdown">
                                         <a href="#" class="btn bt btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="icofont-calendar fs-5 me-1"></i>
-                                            Timeframe<i class="las la-angle-down ms-1"></i>
+                                            <i class="icofont-time fs-5 me-1"></i>
+                                            5min<i class="las la-angle-down ms-1"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-end">
                                             <a class="dropdown-item" href="#">Today</a>
@@ -119,15 +121,30 @@
                                             <a class="dropdown-item" href="#">Last Month</a>
                                             <a class="dropdown-item" href="#">This Year</a>
                                         </div>
-                                    </div>
+                                    </div> -->
+                                    <select id="select-interval" class="form-select">
+                                        <option value="1m" > 1min </option>
+                                        <option value="3m" > 3min </option>
+                                        <option value="5m" selected > 5min </option>
+                                        <option value="15m" > 15min </option>
+                                        <option value="30m" > 30min </option>
+                                        <option value="1h" > 1hour </option>
+                                        <option value="4h" > 4hour </option>
+                                    </select>
+                                    <!-- <button id="" class="btn badge rounded text-warning bg-warning-subtle p-1"><i class="iconoir-bell fs-18 fw-bold text-warning"></i></button> -->
+                                </div>
+                                <div class="col-auto">
+                                    <button id="" class="btn badge rounded text-primary bg-primary-subtle p-1"><i class="iconoir-bell fs-18 fw-bold text-primary"></i></button>
                                 </div>
                             </div>
                         </div>
                         <!--end card-header-->
                         <div class="card-body pt-0">
-                            <div id="audience" class="apex-charts"></div>
+                            {{-- <div id="audience" class="apex-charts"></div> --}}
+                            <div class="rounded" style="height: 290px; background: rgba(255, 255, 255, 0.04);">
+                                <p class="fw-bold mx-auto text-center" style="padding-top: 100px;font-size: 40px; color: rgba(167, 154, 154, 0.65);">{{ $crypto->symbol }} Chart</p>
+                            </div>
                         </div>
-                        <!--end card-body-->
                     </div>
                     <!--end card-->
                 </div>
@@ -137,75 +154,139 @@
                 <div class="col-lg-8 col-md-12">
                     <div class="row">
                         <div class="col"> 
-                            <div class="card  mb-3 mb-lg-0">
+                            <div class="card mb-3 mb-lg-0">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">
-                                        <i class="iconoir-dollar-circle fs-24 align-self-center text-primary me-2"></i>
+                                        <i class="iconoir-candlestick-chart fs-24 align-self-center text-dark me-2"></i>
                                         <div class="flex-grow-1 text-truncate"> 
-                                            <p class="text-dark mb-0 fw-semibold fs-12">Technical Report</p>    
-                                            <!-- <h3 class="mt-1 mb-0 fs-18 fw-bold">$23.45M<span class="fs-11 text-muted fw-normal mx-1">Bitcoin (BTCUSD)</span> </h3>                                                                                                                                    -->
-                                            <span class="badge rounded text-primary fs-18 fw-bold m-0 mt-1 p-0">
-                                                Strong Buy <span class="fs-11 text-muted fw-normal mx-1">Market overtaken</span>
-                                            </span>
-                                        </div><!--end media body-->
+                                            <p class="text-dark mb-0 fw-semibold fs-12">Technical Report</p>                                  
+                                            <span id="ta-recommendation" class="badge rounded text-primary fs-18 fw-bold m-0 mt-1 p-0">
+                                                -- 
+                                            </span><span class="fs-11 text-muted fw-normal mx-1">Sentiment</span>
+                                        </div>
                                     </div>
                                     <div class="row mt-2 align-items-center">
                                         <div class="col-4 text-end align-self-center">
-                                            <div class="text-start ">
-                                                <p class="mb-0 fs-10 text-muted mb-1">Buys</p>  
-                                                <span class="badge rounded text-primary bg-primary-subtle w-100 btn-lg fs-14 fw-bold mt-0 py-1">
-                                                    10%
+                                            <div class="text-center">
+                                                <p class="fw-normal text-muted fs-10 mb-1">Buys</p>  
+                                                <span id="ta-buy" class="badge rounded text-primary bg-primary-subtle w-100 btn-lg fs-14 fw-bold mt-0 py-1">
+                                                    <div class="spinner-border spinner-border-sm text-secondary" role="status"></div> 
                                                 </span>
                                             </div>
                                         </div>
                                         <div class="col-4 text-center align-self-center">
                                             <div class="">
                                                 <h6 class="fw-normal text-muted fs-10 mb-1">Neutral:</h6> 
-                                                <span class="badge rounded text-secondary bg-secondary-subtle w-100 btn-lg fs-14 fw-bold mt-0 py-1">
-                                                    20%
+                                                <span id="ta-neutral" class="badge rounded text-secondary bg-secondary-subtle w-100 btn-lg fs-14 fw-bold mt-0 py-1">
+                                                    <div class="spinner-border spinner-border-sm text-secondary" role="status"></div> 
                                                 </span>
                                             </div>
                                         </div>
-                                        <div class="col-4 text-end align-self-center">
+                                        <div class="col-4 text-center align-self-center">
                                             <div class="">
                                                 <h6 class="fw-normal text-muted fs-10 mb-1">Sells:</h6>
-                                                <span class="badge rounded text-danger bg-danger-subtle w-100 btn-lg fs-14 fw-bold mt-0 py-1">
-                                                    40%
+                                                <span id="ta-sell" class="badge rounded text-danger bg-danger-subtle w-100 btn-lg fs-14 fw-bold mt-0 py-1">
+                                                    <div class="spinner-border spinner-border-sm text-secondary" role="status"></div> 
                                                 </span>
                                             </div>
                                         </div>
                                     </div>
                                 </div><!--end card-body-->
-                            </div> <!--end card-body-->                     
+                            </div>                 
                         </div>
                         <div class="col"> 
                             <div class="card mb-3 mb-lg-0">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center">
-                                        <i class="iconoir-dollar-circle fs-24 align-self-center text-danger me-2"></i>
+                                        <i class="iconoir-area-search fs-24 align-self-center text-dark me-2"></i>
                                         <div class="flex-grow-1 text-truncate"> 
                                             <p class="text-dark mb-0 fw-semibold fs-12">Public News</p>    
-                                            <span class="badge rounded text-danger fs-18 fw-bold m-0 mt-1 p-0">
-                                                Negative <span class="fs-11 text-muted fw-normal mx-1">Weak Reports</span>
+                                            <span class="badge rounded text-primary fs-18 fw-bold m-0 mt-1 p-0">
+                                                Positive <span class="fs-11 text-muted fw-normal mx-1">Reports</span>
                                             </span>                                                                                                                                 
                                         </div><!--end media body-->
                                     </div>
                                     <div class="mt-3">
                                         <div class="d-flex justify-content-between fw-semibold align-items-center">
-                                            <p class="mb-1 d-inline-flex align-items-center"><i class="iconoir-rss-feed-tag fs-18 text-muted me-1"></i>32 Tasks</p>
-                                            <small class="text-end text-body-emphasis d-block ms-auto">90%</small>
+                                            <p class="mb-1 d-inline-flex align-items-center"><i class="iconoir-rss-feed-tag fs-18 text-muted me-1"></i>{{ $news->count() }} Projects</p>
+                                            <small class="text-end text-body-emphasis d-block ms-auto">63%</small>
                                         </div>
                                         <div class="progress bg-primary-subtle" style="height:5px;">
                                             <div class="progress-bar bg-primary rounded-pill" role="progressbar" style="margin-right:2px; width: 20%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
                                             <div class="progress-bar bg-primary rounded-pill" role="progressbar" style="margin-right:2px; width: 20%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                                            <div class="progress-bar bg-primary rounded-pill" role="progressbar" style="margin-right:2px; width: 1%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar bg-primary rounded-pill" role="progressbar" style="margin-right:2px; width: 35%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </div>
                                 </div><!--end card-body-->
-                            </div> <!--end card-body-->                     
+                            </div>                 
                         </div>
                     </div>
-                    <div class="row my-2">
+                    <div class="card mt-2">
+                        <div class="card-body">
+                            <div class="table-responsive browser_users">
+                                <table class="table mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th class="border-top-0"></th>
+                                            <th class="border-top-0">5 minutes</th>
+                                            <th class="border-top-0">15 minutes</th>
+                                            <th class="border-top-0">1 hour</th>
+                                            <th class="border-top-0">1 day</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Ticks</td>
+                                            <td>{{ $crypto->ticks_5m ?? '---' }}</td>
+                                            <td>{{ $crypto->ticks_15m ?? '---' }}</td>
+                                            <td>{{ $crypto->ticks_1h ?? '---' }}</td>
+                                            <td>{{ $crypto->ticks_1d ?? '---' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Changes</td>
+                                            <td>{{ number_format($crypto->change_5m, 2) ?? '---' }}</td>
+                                            <td>{{ number_format($crypto->change_15m, 2) ?? '---' }}</td>
+                                            <td>{{ number_format($crypto->change_1h, 2) ?? '---' }}</td>
+                                            <td>{{ number_format($crypto->change_1d, 2) ?? '---' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>OI Change</td>
+                                            <td>{{ number_format($crypto->oi_change_5m, 2) ?? '---' }}</td>
+                                            <td>{{ number_format($crypto->oi_change_15m, 2) ?? '---' }}</td>
+                                            <td>{{ number_format($crypto->oi_change_1h, 2) ?? '---' }}</td>
+                                            <td>{{ number_format($crypto->oi_change_1d, 2) ?? '---' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Volatility</td>
+                                            <td>{{ number_format($crypto->volatility_5m, 2) ?? '---' }}</td>
+                                            <td>{{ number_format($crypto->volatility_15m, 2) ?? '---' }}</td>
+                                            <td>{{ number_format($crypto->volatility_1h, 2) ?? '---' }}</td>
+                                            <td>{{ number_format($crypto->volatility_1d, 2) ?? '---' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Vdelta</td>
+                                            <td>{{ $crypto->vdelta_5m ?? '---' }}</td> <!-- Placeholder -->
+                                            <td>{{ $crypto->vdelta_15m ?? '---' }}</td> <!-- Placeholder -->
+                                            <td>{{ $crypto->vdelta_1h ?? '---' }}</td> <!-- Placeholder -->
+                                            <td>{{ $crypto->vdelta_1d ?? '---' }}</td> <!-- Placeholder -->
+                                        </tr>
+                                        <tr>
+                                            <td>Volume</td>
+                                            <td>{{ number_format($crypto->volume_5m, 2) ?? '---' }}</td>
+                                            <td>{{ number_format($crypto->volume_15m, 2) ?? '---' }}</td>
+                                            <td>{{ number_format($crypto->volume_1h, 2) ?? '---' }}</td>
+                                            <td>{{ number_format($crypto->volume_1d, 2) ?? '---' }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                @if($crypto->count() < 1)
+                                    <p class="text-dark text-center fs-16 fw-bold py-4 my-4">No available data!</p>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
@@ -221,54 +302,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="p-3  border-primary border-dashed bg-primary-subtle  mt-1 rounded">
-                        <div class="row d-flex justify-content-center">
-                            <div class="col">
-                                <div class=" ">
-                                    <a href="#" class="fw-bold me-1 text-primary">You've almost reached your goal</a> 75% of your goals are completed just complate 25% of remaining goals to achieve your target.
-                                </div>  
-                                <div class="row mt-3">
-                                    <div class="col col-md-12 col-lg-6">
-                                        <div class="">
-                                            <p class="text-dark mb-2 fw-semibold fs-13">News Source</p>
-                                            <div class="img-group d-flex">
-                                                <a class="user-avatar position-relative d-inline-block" href="#">
-                                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSobT6Nq7W-FJnK5lLapZlwySLwB0W4sKCYDg&s" alt="BBC" class="thumb-md shadow-sm rounded-circle">
-                                                </a>
-                                                <a class="user-avatar position-relative d-inline-block ms-n2" href="#">
-                                                    <img src="https://cdn.openbankingexpo.com/wp-content/uploads/2022/07/Coinpedia-Logo_600.png" alt="CNN" class="thumb-md shadow-sm rounded-circle">
-                                                </a>
-                                                <a class="user-avatar position-relative d-inline-block ms-n2" href="#">
-                                                    <img src="https://media.licdn.com/dms/image/v2/C560BAQHNGmbujelSMA/company-logo_200_200/company-logo_200_200/0/1630643047632/altcoinbuzz_logo?e=2147483647&v=beta&t=qN5wBtQUl6kuGrgaQZtOhVLeKDvAoFNQLCsUphX1O1g" alt="The New York Times" class="thumb-md shadow-sm rounded-circle">
-                                                </a>
-                                                <a class="user-avatar position-relative d-inline-block ms-n2" href="#">
-                                                    <img src="https://finbold.com/dist/images/app_icons/favicon.61758a.svg" alt="Al Jazeera" class="thumb-md shadow-sm rounded-circle">
-                                                </a>
-                                                <a class="user-avatar position-relative d-inline-block ms-n2" href="#">
-                                                    <img src="https://s3-us-west-2.amazonaws.com/cbi-image-service-prd/modified/826c68f7-c764-4ec2-b9e8-597726bfd3e6.png" alt="Reuters" class="thumb-md shadow-sm rounded-circle">
-                                                </a>
-                                                <a class="user-avatar position-relative d-inline-block ms-n2" href="#">
-                                                    <img src="https://www.cryptopolitan.com/wp-content/uploads/2022/05/CP-logo.png" alt="The Guardian" class="thumb-md shadow-sm rounded-circle">
-                                                </a>
-                                                <a href="#" class="user-avatar position-relative d-inline-block ms-1">
-                                                    <span class="thumb-md shadow-sm justify-content-center d-flex align-items-center bg-info-subtle rounded-circle fw-semibold fs-6">+20</span>
-                                                </a>                    
-                                            </div>
-
-                                        </div>                                         
-                                    </div><!--end col-->
-                                    <div class="col col-md-12 col-lg-6 align-self-center">
-                                        <span class="badge rounded text-primary bg-transparent border border-primary mb-2 p-1">Senior team leader interview</span>
-                                        <p class="text-dark  fw-semibold fs-13">15 Aug 2024, AM-10:15</p>
-                                    </div><!--end col-->
-                                </div><!--end row-->
-                                                                        
-                            </div><!--end col-->
-                            <div class="col-auto align-self-center">
-                                <button type="button" class="btn btn-primary px-3 btn-sm mt-2">View All</button> 
-                            </div><!--end col-->
-                        </div><!--end row-->                                
-                    </div> 
                 </div>
                 <div class="col-lg-4 col-md-12">
                     <div class="">
@@ -277,93 +310,42 @@
                                 <div class="row align-items-center">
                                     <div class="col">                      
                                         <h4 class="card-title">Technical Summary</h4>                      
-                                    </div><!--end col-->
-                                    <div class="col-auto">
-                                        <div class="input-group">
-                                            <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
-                                              <option value="1">One</option>
-                                              <option value="4hr" selected>4 hours</option>
-                                              <option value="3">Three</option>
-                                            </select>
-                                        </div>
-                                    </div><!--end col-->
-                                </div>  <!--end row-->                                  
-                            </div><!--end card-header-->
+                                    </div>
+                                    <div class="col-auto">                      
+                                        <!-- <span class="badge rounded text-warning bg-warning-subtle fs-12 p-1"><i class="iconoir-refresh fs-14 fw-bold text-warning"></i></span>  -->
+                                        <button id="refreshTA" class="btn badge rounded text-warning bg-warning-subtle fs-12 p-1"><i class="iconoir-refresh fs-14 fw-bold text-warning"></i></button>                 
+                                    </div>
+                                </div>                            
+                            </div>
                             <div class="card-body pt-0">
-                                <div class="my-2">
-                                    <div class="d-flex justify-content-between">
-                                        <p class="text-muted fw-semibold">Items subtotal :</p>
-                                        <p class="text-body-emphasis fw-semibold">$1060 <span class="badge rounded text-success bg-success-subtle fs-12 mx-2">Buy</span></p>
-                                    </div>
-                                    <div class="d-flex justify-content-between">
-                                        <p class="text-muted fw-semibold">Discount :</p>
-                                        <p class="text-muted fw-semibold">$80 <span class="badge rounded text-danger bg-danger-subtle fs-12 mx-2">Sell</span></p>
-                                    </div>
-                                    <div class="d-flex justify-content-between">
-                                        <p class="text-muted fw-semibold">Tax :</p>
-                                        <p class="text-body-emphasis fw-semibold">$180.70 <span class="badge rounded text-secondary bg-secondary-subtle fs-12 mx-2">Neutral</span></p>
-                                    </div>
-                                    <div class="d-flex justify-content-between">
-                                        <p class="text-muted fw-semibold">Items subtotal :</p>
-                                        <p class="text-body-emphasis fw-semibold">$1060 <span class="badge rounded text-success bg-success-subtle fs-12 mx-2">Buy</span></p>
-                                    </div>
-                                    <div class="d-flex justify-content-between">
-                                        <p class="text-muted fw-semibold">Discount :</p>
-                                        <p class="text-muted fw-semibold">$80 <span class="badge rounded text-danger bg-danger-subtle fs-12 mx-2">Sell</span></p>
-                                    </div>
-                                    <div class="d-flex justify-content-between">
-                                        <p class="text-muted fw-semibold">Tax :</p>
-                                        <p class="text-body-emphasis fw-semibold">$180.70 <span class="badge rounded text-secondary bg-secondary-subtle fs-12 mx-2">Neutral</span></p>
-                                    </div>
+                                <div id="technical-container" class="my-2">
+
                                 </div>
-                                <span class="badge rounded text-primary bg-primary-subtle w-100 btn-lg fs-14 fw-bold mt-2 py-2">
-                                    Strong Buy 
-                                </span>
-                            </div><!--card-body-->
-                        </div><!--end card-->
+                                <!-- <span class="badge rounded text-danger bg-danger-subtle w-100 btn-lg fs-14 fw-bold mt-2 py-2">
+                                    Strong Sell 
+                                </span> -->
+                            </div>
+                        </div>
                         <div class="card">
                             <div class="card-header">
                                 <div class="row align-items-center">
                                     <div class="col">                      
                                         <h4 class="card-title">Indicator Summary</h4>                      
-                                    </div><!--end col-->
-                                    <div class="col-auto">                      
-                                        <!-- <span class="badge rounded text-warning bg-warning-subtle fs-12 p-1">Payment pending</span>                   -->
-                                    </div><!--end col-->
-                                </div>  <!--end row-->                                  
-                            </div><!--end card-header-->
+                                    </div>
+                                    <div class="col-auto">
+                                        <!-- <i class="iconoir-refresh-circle fs-18 align-self-center text-muted me-2"></i> -->
+                                    </div>
+                                </div>                                  
+                            </div>
                             <div class="card-body pt-0">
-                                <div class="my-2">
-                                    <div class="d-flex justify-content-between">
-                                        <p class="text-muted fw-semibold">Items subtotal :</p>
-                                        <p class="text-body-emphasis fw-semibold">$1060 <span class="badge rounded text-success bg-success-subtle fs-12 mx-2">Buy</span></p>
-                                    </div>
-                                    <div class="d-flex justify-content-between">
-                                        <p class="text-muted fw-semibold">Discount :</p>
-                                        <p class="text-muted fw-semibold">$80 <span class="badge rounded text-danger bg-danger-subtle fs-12 mx-2">Sell</span></p>
-                                    </div>
-                                    <div class="d-flex justify-content-between">
-                                        <p class="text-muted fw-semibold">Tax :</p>
-                                        <p class="text-body-emphasis fw-semibold">$180.70 <span class="badge rounded text-secondary bg-secondary-subtle fs-12 mx-2">Neutral</span></p>
-                                    </div>
-                                    <div class="d-flex justify-content-between">
-                                        <p class="text-muted fw-semibold">Items subtotal :</p>
-                                        <p class="text-body-emphasis fw-semibold">$1060 <span class="badge rounded text-success bg-success-subtle fs-12 mx-2">Buy</span></p>
-                                    </div>
-                                    <div class="d-flex justify-content-between">
-                                        <p class="text-muted fw-semibold">Discount :</p>
-                                        <p class="text-muted fw-semibold">$80 <span class="badge rounded text-danger bg-danger-subtle fs-12 mx-2">Sell</span></p>
-                                    </div>
-                                    <div class="d-flex justify-content-between">
-                                        <p class="text-muted fw-semibold">Tax :</p>
-                                        <p class="text-body-emphasis fw-semibold">$180.70 <span class="badge rounded text-secondary bg-secondary-subtle fs-12 mx-2">Neutral</span></p>
-                                    </div>
+                                <div id="indicator-container" class="my-2">
+                                    <!-- Indicators will be populated dynamically here -->
                                 </div>
-                                <span class="badge rounded text-danger bg-danger-subtle w-100 btn-lg fs-14 fw-bold mt-2 py-2">
-                                    Strong Sell 
+                                <span id="recommendation-badge" class="badge rounded text-primary bg-primary-subtle w-100 btn-lg fs-14 fw-bold mt-2 py-2">
+                                    Recommendation
                                 </span>
-                            </div><!--card-body-->
-                        </div><!--end card-->
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -378,18 +360,18 @@
                                 <span class="badge rounded text-muted fw-semibold px-2 mb-1">{{ \Carbon\Carbon::parse($data->published_at)->diffForHumans() }}</span>
                             </div>
                             <h5 class="my-2 font-14">
-                                <a href="{{ $data->source_url }}" rel="noopener" target="_blank">{{ $data->title }}</a>
+                                <a href="{{ $data->source_url }}" rel="noopener" target="_blank" class="truncate-2-lines">{{ $data->title }}</a>
                             </h5>
-                            <p class="text-muted mb-0 flex-grow-1">{{ $data->description }}</p>
+                            <p class="text-muted mb-0 flex-grow-1 truncate-3-line">{{ truncateWords($data->description, 25, '...') }}</p>
                             <hr class="hr-dashed">
                             <div class="d-flex justify-content-between fw-semibold align-items-center">
                                 <p class="mb-1 d-inline-flex align-items-center"><i class="iconoir-task-list fs-18 text-muted me-1"></i>Sentiment Score</p>
-                                <small class="text-end text-body-emphasis d-block ms-auto">-20%</small>
+                                <small class="text-end text-body-emphasis d-block ms-auto">{{ ($data->sentiment_score * 100) }}%</small>
                             </div>
-                            <div class="progress bg-danger-subtle" style="height:5px;">
-                                <div class="progress-bar bg-danger rounded-pill" role="progressbar" style="margin-right:2px; width: 10%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                                <div class="progress-bar bg-danger rounded-pill" role="progressbar" style="margin-right:2px; width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                <div class="progress-bar bg-danger rounded-pill" role="progressbar" style="margin-right:2px; width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress @if($data->sentiment_score <= -0) bg-danger-subtle @else bg-primary-subtle @endif" style="height:5px;">
+                                <div class="progress-bar @if($data->sentiment_score <= -0) bg-danger @else bg-primary @endif rounded-pill" role="progressbar" style="margin-right:2px; width: 25%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar @if($data->sentiment_score <= -0) bg-danger @else bg-primary @endif rounded-pill" role="progressbar" style="margin-right:2px; width: 10%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar @if($data->sentiment_score <= -0) bg-danger @else bg-primary @endif rounded-pill" role="progressbar" style="margin-right:2px; width: {{ ($data->sentiment_score * 100) }}%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div><!--end card-body-->
                     </div>
@@ -404,327 +386,265 @@
 
 @section('script')
 
-<!-- <script>
-var options = {
-    series: (series.monthDataSeries1.prices, [{
-       name: "Expenses",
-       data: [0, 30, 10, 40, 30, 60, 50, 80, 70, 100, 90, 130]
-    }]),
-    chart: {
-       height: 280,
-       type: "area",
-       toolbar: {
-          show: !1
-       },
-       dropShadow: {
-          enabled: !0,
-          top: 10,
-          left: 0,
-          bottom: 0,
-          right: 0,
-          blur: 2,
-          color: "rgba(132, 145, 183, 0.3)",
-          opacity: .35
-       }
-    },
-    colors: ["#63c522"],
-    dataLabels: {
-       enabled: !1
-    },
-    stroke: {
-       show: !0,
-       curve: "smooth",
-       width: [3, 3],
-       dashArray: [0, 0],
-       lineCap: "round"
-    },
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-    yaxis: {
-       labels: {
-          offsetX: -12,
-          offsetY: 0,
-          formatter: function (e) {
-             return "$" + e
-          }
-       }
-    },
-    grid: {
-       strokeDashArray: 3,
-       xaxis: {
-          lines: {
-             show: !0
-          }
-       },
-       yaxis: {
-          lines: {
-             show: !1
-          }
-       }
-    },
-    legend: {
-       show: !1
-    },
-    fill: {
-       type: "gradient",
-       gradient: {
-          type: "vertical",
-          shadeIntensity: 1,
-          inverseColors: !1,
-          opacityFrom: .05,
-          opacityTo: .05,
-          stops: [45, 100]
-       }
-    }
- },
- chart = new ApexCharts(document.querySelector("#audience"), options),
- options = (chart.render());
-</script> -->
-
 <script>
-var chart = {
-   series: [{
-      name: "2024",
-      data: [2.7, 2.2, -1.3, 2.5, 1, -2.5, 1.2, 1.2, 2.7, -1, 3.6, 2.1]
-   }],
-   chart: {
-      toolbar: {
-         show: !1
-      },
-      type: "bar",
-      fontFamily: "inherit",
-      foreColor: "#adb0bb",
-      height: 292,
-      stacked: !0,
-      offsetX: -15
-   },
-   colors: ["var(--bs-primary)"],
-   plotOptions: {
-      bar: {
-         horizontal: !1,
-         barHeight: "80%",
-         columnWidth: "12%",
-         borderRadius: [3],
-         borderRadiusApplication: "end",
-         borderRadiusWhenStacked: "all"
-      }
-   },
-   dataLabels: {
-      enabled: !1
-   },
-   legend: {
-      show: !1
-   },
-   grid: {
-      show: !0,
-      strokeDashArray: 3,
-      padding: {
-         top: 0,
-         bottom: 0,
-         right: 0
-      },
-      borderColor: "rgba(0,0,0,0.05)",
-      xaxis: {
-         lines: {
-            show: !0
-         }
-      },
-      yaxis: {
-         lines: {
-            show: !1
-         }
-      }
-   },
-   yaxis: {
-      tickAmount: 4
-   },
-   xaxis: {
-      axisBorder: {
-         show: !1
-      },
-      axisTicks: {
-         show: !1
-      },
-      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sep", "Oct", "Nov", "Dec"]
-   }
-};
-(chart = new ApexCharts(document.querySelector("#reports-bar"), chart)).render();
+    document.addEventListener("DOMContentLoaded", () => {
+        const symbol = "{{ $crypto->symbol }}";
+
+        // Connect to the WebSocket server
+        const socket = new WebSocket("wss://ws.itrustinvestment.com");
+
+        socket.onopen = () => {
+            console.log("WebSocket connection established.");
+
+            // Subscribe to updates for the specific symbol
+            socket.send(JSON.stringify({ type: "subscribe", symbol }));
+        };
+
+        socket.onmessage = (event) => {
+            try {
+                const data = JSON.parse(event.data);
+
+                if (data.symbol == symbol) {
+                    // console.log("WebSocket Data Received:", data.data.price);
+                    updateCryptoData(data.data);
+                }
+            } catch (error) {
+                console.error("Error parsing WebSocket message:", error.message);
+            }
+        };
+
+        socket.onerror = (error) => {
+            console.error("WebSocket error:", error);
+        };
+
+        socket.onclose = () => {
+            console.log("WebSocket connection closed.");
+        };
+
+        function updateCryptoData(data) {
+            // Update price
+            const priceElement = document.querySelector(".crypto-price");
+            const oldPrice = parseFloat(priceElement.dataset.price);
+            const newPrice = parseFloat(data.price);
+
+            // Check for changes and apply color
+            if (newPrice !== oldPrice) {
+                const difference = newPrice - oldPrice;
+                const colorClass = difference > 0 ? "text-primary" : "text-danger";
+
+                // Update digits with animation
+                priceElement.innerHTML = `
+                    $${formatNumber(Math.floor(newPrice))}.<span class="fs-15 text-muted fw-normal">
+                    ${String(newPrice.toFixed(2)).split(".")[1]}
+                    </span>
+                `;
+
+                function formatNumber(num) {
+                    return num.toLocaleString();
+                }
+
+                priceElement.classList.add(colorClass);
+
+                // Remove color class after animation
+                setTimeout(() => priceElement.classList.remove(colorClass), 1000);
+
+                // Update the dataset price
+                priceElement.dataset.price = newPrice;
+            }
+
+            // Update percentage change
+            const changeElement = document.querySelector(".crypto-change");
+            changeElement.textContent = `${data.change_15m.toFixed(2)}%`;
+            changeElement.className = `fs-11 ${data.change_15m > 0 ? "text-primary" : "text-danger"} fw-normal mx-1`;
+        }
+    });
+
+    $(document).ready(function () {
+        $('#refreshTA').on('click', function () {
+            resetUI();
+            fetchTA();
+        });
+
+        $('#select-interval').on('change', function () {
+            resetUI();
+            fetchTA();
+        });
+
+        function fetchTA() {
+            const selectedInterval = $('#select-interval').val();
+
+            const url = `http://localhost:5000/api/sentiment?symbol={{ $crypto->symbol }}&exchange=Binance&screener=crypto&interval=${selectedInterval}`;
+
+            // Define mappings for classes and recommendations
+            const recommendationStyles = {
+                BUY: { text: "success", bg: "success-subtle" },
+                STRONG_BUY: { text: "primary", bg: "primary-subtle" },
+                SELL: { text: "danger", bg: "danger-subtle" },
+                STRONG_SELL: { text: "danger", bg: "danger-subtle" },
+                NEUTRAL: { text: "dark", bg: "light-subtle" },
+            };
+
+            const indicatorsToShow = ["EMA10", "EMA20", "EMA30", "SMA10", "SMA20", "SMA30", "VWMA"];
+            const technicalToShow = ["BBPower", "MACD.signal", "P.SAR", "HullMA9", "UO", "ADX", "RSI", "Stoch.D", "VWMA", "W.R", "Recommend.All"];
+
+            const getStyles = (key) => recommendationStyles[key] || { text: "light", bg: "light-subtle" };
+
+            // Fetch and process data from API
+            $.get(url)
+                .done(function (data) {
+                    const { RECOMMENDATION, SELL, BUY, NEUTRAL, COMPUTE } = data.moving_averages;
+                    const indicatorsVal = data.indicators;
+
+                    // Apply recommendation styles
+                    const recommendation = RECOMMENDATION.replace("_", " ");
+                    const { text, bg } = getStyles(RECOMMENDATION);
+
+                    // Update UI elements
+                    updateRecommendationBadge(recommendation, text, bg);
+                    updateRecommendationSummary(SELL, NEUTRAL, BUY);
+                    updateIndicators(COMPUTE, indicatorsVal);
+                    updateTechnicals(indicatorsVal);
+                })
+                .fail(function (error) {
+                    console.error("Error fetching sentiment data:", error);
+                    $("#action-btn .badge").text("Not Available").attr("class", "badge rounded w-100 btn-lg fs-14 fw-bold mt-2 py-2 text-dark bg-black");
+                });
+
+            function updateRecommendationBadge(recommendation, text, bg) {
+                $("#action-btn .badge").text(recommendation).attr("class", `badge rounded w-100 btn-lg fs-14 fw-bold mt-2 py-2 text-${text} bg-${bg}`);
+                $("#ta-recommendation").text(recommendation).attr("class", `badge rounded text-${text} fs-18 fw-bold m-0 mt-1 p-0`);
+                $("#recommendation-badge").text(recommendation).attr("class", `badge rounded text-${text} bg-${text}-subtle w-100 btn-lg fs-14 fw-bold mt-2 py-2`);
+                $("#summary-card").attr("class", `truncate-3-lines p-2 border-${text} border-dashed bg-${bg} rounded text-dark fs-12`);
+            }
+
+            function updateRecommendationSummary(SELL, NEUTRAL, BUY) {
+                $("#ta-sell").text(SELL);
+                $("#ta-neutral").text(NEUTRAL);
+                $("#ta-buy").text(BUY);
+            }
+
+            function updateIndicators(COMPUTE, indicatorsVal) {
+                $("#indicator-container").empty();
+                indicatorsToShow.forEach((indicator) => {
+                    const action = COMPUTE[indicator] || "NEUTRAL";
+                    const value = indicatorsVal[indicator] || "N/A";
+                    const { text, bg } = recommendationStyles[action] || recommendationStyles.NEUTRAL;
+
+                    const indicatorHtml = `
+                        <div class="d-flex justify-content-between">
+                            <p class="text-muted fw-semibold">${indicator} :</p>
+                            <p class="text-body-emphasis fw-semibold">
+                                ${value.toFixed(4)} <span class="badge rounded text-${text} bg-${bg} fs-12 mx-2">${action}</span>
+                            </p>
+                        </div>`;
+                    $("#indicator-container").append(indicatorHtml);
+                });
+            }
+
+            function updateTechnicals(indicatorsVal) {
+                $("#technical-container").empty();
+                technicalToShow.forEach((indicator) => {
+                    const value = indicatorsVal[indicator] || "N/A";
+                    const technicalHtml = `
+                        <div class="d-flex justify-content-between">
+                            <p class="text-muted fw-semibold">${indicator} :</p>
+                            <p class="text-body-emphasis fw-semibold">${value.toFixed(4)}</p>
+                        </div>`;
+                    $("#technical-container").append(technicalHtml);
+                });
+            }
+        };
+
+        function resetUI() {
+            $("#action-btn .badge").text("Loading...").attr("class", "badge rounded w-100 btn-lg fs-14 fw-bold mt-2 py-2 text-warning bg-warning-subtle");
+            $("#ta-recommendation").text("Loading...").attr("class", "badge rounded text-warning fs-18 fw-bold m-0 mt-1 p-0");
+            $("#recommendation-badge").text("Loading...").attr("class", "badge rounded text-warning bg-warning-subtle w-100 btn-lg fs-14 fw-bold mt-2 py-2");
+            $("#summary-card").attr("class", "truncate-3-lines p-2 border-warning border-dashed bg-warning-subtle rounded text-dark fs-12");
+            $("#ta-sell").text("...");
+            $("#ta-neutral").text("...");
+            $("#ta-buy").text("...");
+            $("#indicator-container").empty().append('<div class="loader">Loading indicators...</div>');
+            $("#technical-container").empty().append('<div class="loader">Loading technicals...</div>');
+        }
+
+        fetchTA();
+    });
 </script>
 
-
 <script>
-document.addEventListener("DOMContentLoaded", function (e) {
-    var t, n = {
-       min: 0,
-       max: 200,
-       donut: !0,
-       gaugeWidthScale: .6,
-       counter: !0,
-       hideInnerShadow: !0,
-       gaugeColor: ["rgba(42, 118, 244, .1)"],
-       levelColors: ["#22c55e"]
+    var sentimentScores = @json($score);
+    var categories = @json($categories);
+
+    var chart = {
+        series: [{
+            name: "2024",
+            data: sentimentScores
+        }],
+        chart: {
+            toolbar: {
+                show: false
+            },
+            type: "bar",
+            fontFamily: "inherit",
+            foreColor: "#adb0bb",
+            height: 292,
+            stacked: true,
+            offsetX: -15
+        },
+        plotOptions: {
+            bar: {
+                horizontal: false,
+                barHeight: "80%",
+                columnWidth: "20%",
+                borderRadius: [3],
+                borderRadiusApplication: "end",
+                borderRadiusWhenStacked: "all"
+            }
+        },
+        dataLabels: {
+            enabled: false
+        },
+        legend: {
+            show: false
+        },
+        grid: {
+            show: true,
+            strokeDashArray: 3,
+            padding: {
+                top: 0,
+                bottom: 0,
+                right: 0
+            },
+            borderColor: "rgba(0,0,0,0.05)",
+            xaxis: {
+                lines: {
+                    show: true
+                }
+            },
+            yaxis: {
+                lines: {
+                    show: false
+                }
+            }
+        },
+        yaxis: {
+            tickAmount: 4
+        },
+        xaxis: {
+            axisBorder: {
+                show: false
+            },
+            axisTicks: {
+                show: false
+            },
+            categories: categories
+        },
+        colors: sentimentScores.map(function(score) {
+            return score < 0 ? "red" : "var(--bs-primary)";
+        })
     };
-    new JustGage({
-       id: "gg1",
-       value: 125,
-       title: "javascript call",
-       defaults: n
-    }), new JustGage({
-       id: "gg2",
-       title: "data-attributes",
-       defaults: n
-    });
- 
-    function o(e, t) {
-       return Math.floor(Math.random() * (t - e + 1)) + e
-    }
-    t = new JustGage({
-       id: "Counter_2",
-       value: 72,
-       min: 0,
-       max: 100,
-       donut: !0,
-       gaugeWidthScale: .6,
-       counter: !0,
-       hideInnerShadow: !0,
-       gaugeColor: ["rgba(42, 118, 244, .1)"],
-       levelColors: ["#22c55e"]
-    }), document.getElementById("Counter_2_refresh").addEventListener("click", function () {
-       t.refresh(o(0, 100))
-    });
-    var a = new JustGage({
-          id: "Counter",
-          value: 40960,
-          min: 1024,
-          max: 1e6,
-          gaugeWidthScale: .6,
-          counter: !0,
-          formatNumber: !0,
-          gaugeColor: ["rgba(42, 118, 244, .1)"],
-          levelColors: ["#22c55e"]
-       }),
-       l = (document.getElementById("Counter_refresh").addEventListener("click", function () {
-          a.refresh(o(1024, 1e6))
-       }), new JustGage({
-          id: "Animation_Events",
-          value: 45,
-          min: 0,
-          max: 100,
-          symbol: "%",
-          pointer: !0,
-          gaugeColor: ["rgba(42, 118, 244, .1)"],
-          levelColors: ["#22c55e"],
-          pointerOptions: {
-             toplength: -15,
-             bottomlength: 10,
-             bottomwidth: 12,
-             color: "#ff5da0",
-             stroke: "#ffffff",
-             stroke_width: 3,
-             stroke_linecap: "round"
-          },
-          gaugeWidthScale: .6,
-          counter: !0,
-          onAnimationEnd: function () {
-             console.log("animation ended");
-             var e = document.getElementById("log");
-             e.innerHTML = e.innerHTML + "Animation just ended.<br/>"
-          }
-       })),
-       i = (document.getElementById("Animation_Events_refresh").addEventListener("click", function () {
-          l.refresh(o(0, 100))
-       }), new JustGage({
-          id: "Custom_wether",
-          value: 50,
-          min: 0,
-          max: 100,
-          title: "Target",
-          label: "temperature",
-          pointer: !0,
-          gaugeColor: ["rgba(42, 118, 244, .1)"],
-          levelColors: ["#22c55e"],
-          textRenderer: function (e) {
-             return e < 50 ? "Cold" : 50 < e ? "Hot" : 50 === e ? "OK" : void 0
-          },
-          onAnimationEnd: function () {
-             console.log("f: onAnimationEnd()")
-          }
-       })),
-       n = (document.getElementById("Custom_wether_refresh").addEventListener("click", function () {
-          return i.refresh(o(0, 100)), !1
-       }), font_option = new JustGage({
-          id: "font_option",
-          title: "Font Options",
-          value: 72,
-          min: 0,
-          minTxt: "min",
-          max: 100,
-          maxTxt: "max",
-          gaugeWidthScale: .6,
-          counter: !0,
-          gaugeColor: ["rgba(42, 118, 244, .1)"],
-          levelColors: ["#22c55e"],
-          titleFontColor: "red",
-          titleFontFamily: "Georgia",
-          titlePosition: "below",
-          valueFontColor: "blue",
-          valueFontFamily: "Georgia"
-       }), document.getElementById("font_option_refresh").addEventListener("click", function () {
-          font_option.refresh(o(0, 100))
-       }), {
-          label: "label",
-          value: 65,
-          min: 0,
-          max: 100,
-          decimals: 0,
-          gaugeWidthScale: .6,
-          pointer: !0,
-          gaugeColor: ["rgba(42, 118, 244, .1)"],
-          levelColors: ["#22c55e"],
-          pointerOptions: {
-             toplength: 10,
-             bottomlength: 10,
-             bottomwidth: 2
-          },
-          counter: !0
-       }),
-       r = {
-          label: "label",
-          value: 35,
-          min: 0,
-          max: 100,
-          decimals: 0,
-          gaugeWidthScale: .6,
-          pointer: !0,
-          gaugeColor: ["rgba(42, 118, 244, .1)"],
-          levelColors: ["#22c55e"],
-          pointerOptions: {
-             toplength: 5,
-             bottomlength: 15,
-             bottomwidth: 2
-          },
-          counter: !0,
-          donut: !0
-       };
-    new JustGage({
-       id: "jg1",
-       defaults: n
-    }), new JustGage({
-       id: "jg2",
-       defaults: n
-    }), new JustGage({
-       id: "jg3",
-       defaults: n
-    }), new JustGage({
-       id: "jg4",
-       defaults: r
-    }), new JustGage({
-       id: "jg5",
-       defaults: r
-    }), new JustGage({
-       id: "jg6",
-       defaults: r
-    })
- });
+    var chartInstance = new ApexCharts(document.querySelector("#reports-bar"), chart);
+    chartInstance.render();
 </script>
 
 <script>

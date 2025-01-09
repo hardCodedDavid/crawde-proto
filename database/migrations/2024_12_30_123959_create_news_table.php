@@ -20,7 +20,11 @@ return new class extends Migration
             $table->text('source_url');
             $table->text('img')->nullable();
             $table->timestamp('published_at')->nullable();
-            $table->enum('company', ['FMP', 'TDV']);
+            $table->enum('company', ['FMP', 'TDV'])->default('FMP');
+            $table->decimal('score_tb', 5, 2)->default(0);
+            $table->decimal('score_vd', 5, 2)->default(0);
+            $table->decimal('score_af', 5, 2)->default(0);
+            $table->decimal('sentiment_score', 5, 2)->default(0);
             $table->timestamps();
         });
     }

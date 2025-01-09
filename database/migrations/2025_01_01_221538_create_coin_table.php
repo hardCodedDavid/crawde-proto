@@ -17,24 +17,45 @@ return new class extends Migration
             $table->string('name');
             $table->text('slug');
             $table->text('img');
-            $table->decimal('price', 15, 8)->nullable(); // Field for "11"
-            $table->decimal('change_15m', 15, 8)->nullable(); // Field for "0"
-            $table->decimal('change_1d', 15, 8)->nullable(); // Field for "1"
-            $table->decimal('change_1h', 15, 8)->nullable(); // Field for "2"
-            $table->decimal('change_5m', 15, 8)->nullable(); // Field for "3"
-            $table->decimal('change_8h', 15, 8)->nullable(); // Field for "4"
-            $table->decimal('funding_rate', 15, 8)->nullable(); // Field for "5"
-            $table->decimal('oi_change_15m', 15, 8)->nullable(); // Field for "6"
-            $table->decimal('oi_change_1d', 15, 8)->nullable(); // Field for "7"
-            $table->decimal('oi_change_1h', 15, 8)->nullable(); // Field for "8"
-            $table->decimal('oi_change_8h', 15, 8)->nullable(); // Field for "9"
-            $table->text('open_interest')->nullable(); // Field for "10" (Array)
-            $table->decimal('volatility_15m', 15, 8)->nullable(); // Field for "12"
-            $table->decimal('volatility_1h', 15, 8)->nullable(); // Field for "13"
-            $table->decimal('volatility_5m', 15, 8)->nullable(); // Field for "14"
-            $table->decimal('marketcap', 20, 2)->nullable(); // Field for "40"
-            $table->decimal('btc_correlation_1d', 15, 8)->nullable(); // Field for "42"
-            $table->decimal('eth_correlation_1d', 15, 8)->nullable(); // Field for "43"
+            $table->decimal('price', 25, 8)->nullable(); // 11
+
+            $table->decimal('change_5m', 25, 8)->nullable(); // 3
+            $table->decimal('change_15m', 25, 8)->nullable(); // 0
+            $table->decimal('change_1h', 25, 8)->nullable(); // 2
+            $table->decimal('change_8h', 25, 8)->nullable(); // 4
+            $table->decimal('change_1d', 25, 8)->nullable(); // 1
+
+            $table->decimal('volatility_5m', 25, 8)->nullable(); // 14
+            $table->decimal('volatility_15m', 25, 8)->nullable(); // 12
+            $table->decimal('volatility_1h', 25, 8)->nullable(); // 13
+
+            $table->decimal('ticks_5m', 25, 8)->nullable(); // 17
+            $table->decimal('ticks_15m', 25, 8)->nullable(); // 15
+            $table->decimal('ticks_1h', 25, 8)->nullable(); // 16
+
+            $table->decimal('vdelta_5m', 25, 8)->nullable(); // 21
+            $table->decimal('vdelta_15m', 25, 8)->nullable(); // 18
+            $table->decimal('vdelta_1h', 25, 8)->nullable(); // 20
+            $table->decimal('vdelta_8h', 25, 8)->nullable(); // 22
+            $table->decimal('vdelta_1d', 25, 8)->nullable(); // 19
+
+            $table->decimal('volume_5m', 25, 8)->nullable(); // 26
+            $table->decimal('volume_15m', 25, 8)->nullable(); // 23
+            $table->decimal('volume_1h', 25, 8)->nullable(); // 25
+            $table->decimal('volume_8h', 25, 8)->nullable(); // 27
+            $table->decimal('volume_1d', 25, 8)->nullable(); // 24
+
+            $table->decimal('oi_change_5m', 25, 8)->nullable(); // 50 {obj}
+            $table->decimal('oi_change_15m', 25, 8)->nullable(); // 6 {obj}
+            $table->decimal('oi_change_1h', 25, 8)->nullable(); // 8 {obj}
+            $table->decimal('oi_change_1d', 25, 8)->nullable(); // 9 {obj}
+            $table->decimal('oi_change_8h', 25, 8)->nullable(); // 7 {obj}
+
+            $table->decimal('funding_rate', 25, 8)->nullable(); // 5
+            $table->text('open_interest', 25, 8)->nullable(); // 10  {obj}
+            $table->decimal('marketcap', 25, 8)->nullable(); // 40
+            $table->decimal('btc_correlation_1d', 25, 8)->nullable(); // 42
+            $table->decimal('eth_correlation_1d', 25, 8)->nullable(); // 43
             $table->timestamps();
         });        
     }

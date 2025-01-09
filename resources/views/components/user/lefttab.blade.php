@@ -40,13 +40,13 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#" aria-controls="sidebarDashboards">
                                 <i class="iconoir-user menu-icon"></i> 
-                                <span>Socials</span> <span class="badge rounded text-info bg-info-subtle ms-1">Coming soon</span>
+                                <span>Socials</span> <span class="badge rounded text-primary bg-primary-subtle ms-1">Coming soon</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#" aria-controls="sidebarDashboards">
                                 <i class="iconoir-rss-feed-tag menu-icon"></i> 
-                                <span>News</span> <span class="badge rounded text-info bg-info-subtle ms-1"><i class="iconoir-info-circle text-info"></i></span>
+                                <span>News</span> <span class="badge rounded text-primary bg-primary-subtle ms-1"><i class="iconoir-info-circle text-primary"></i></span>
                             </a>
                         </li>
                         <li class="menu-label pt-0 mt-1">
@@ -55,13 +55,13 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#" aria-controls="sidebarDashboards">
                                 <i class="iconoir-bell menu-icon"></i> 
-                                <span>Alerts</span> <span class="badge rounded text-info bg-info-subtle ms-1"><i class="iconoir-info-circle text-info"></i></span>
+                                <span>Alerts</span> <span class="badge rounded text-primary bg-primary-subtle ms-1"><i class="iconoir-info-circle text-primary"></i></span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#" aria-controls="sidebarDashboards">
                                 <i class="iconoir-calculator menu-icon"></i> 
-                                <span>Calculator</span> <span class="badge rounded text-info bg-info-subtle ms-1"><i class="iconoir-info-circle text-info"></i></span>
+                                <span>Calculator</span> <span class="badge rounded text-primary bg-primary-subtle ms-1"><i class="iconoir-info-circle text-primary"></i></span>
                             </a>
                         </li>
                     </ul><!--end navbar-nav--->

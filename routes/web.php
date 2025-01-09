@@ -9,7 +9,7 @@ use App\Http\Controllers\ProfileController;
 // });
 
 Route::get('/', [HomeController::class, 'index'])->name('user.index');
-Route::get('/crypto/{id}/{symbol}', [HomeController::class, 'show'])->name('user.show');
+Route::get('/screener/crypto/{symbol}', [HomeController::class, 'show'])->name('screener.show');
 Route::get('/calender', [HomeController::class, 'calender'])->name('user.calender');
 Route::get('/py', [HomeController::class, 'pycalls'])->name('python.test');
 

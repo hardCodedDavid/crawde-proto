@@ -30,7 +30,7 @@ class FetchCryptoNews extends Command
     public function handle()
     {
         // Define the API endpoint and fetch the response
-        $url = 'https://financialmodelingprep.com/api/v4/crypto_news?limit=200&apikey=' . env('FMP_KEY');
+        $url = 'https://financialmodelingprep.com/api/v4/crypto_news?limit=500&apikey=' . env('FMP_KEY');
         $response = Http::get($url);
 
         // Check if the request was successful
