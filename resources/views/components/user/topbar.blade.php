@@ -62,12 +62,12 @@
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <a class="nav-link mx-0" data-bs-toggle="tab" href="#Projects" role="tab" aria-selected="false" tabindex="-1">
-                                        Projects
+                                        Screener
                                     </a>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <a class="nav-link mx-0" data-bs-toggle="tab" href="#Teams" role="tab" aria-selected="false" tabindex="-1">
-                                        Team
+                                        News
                                     </a>
                                 </li>
                             </ul>
@@ -79,69 +79,57 @@
                                             <small class="float-end text-muted ps-2">2 min ago</small>
                                             <div class="d-flex align-items-center">
                                                 <div class="flex-shrink-0 bg-primary-subtle text-primary thumb-md rounded-circle">
-                                                    <i class="iconoir-wolf fs-4"></i>
+                                                    <i class="iconoir-bell fs-4"></i>
                                                 </div>
                                                 <div class="flex-grow-1 ms-2 text-truncate">
-                                                    <h6 class="my-0 fw-normal text-dark fs-13">Your order is placed</h6>
-                                                    <small class="text-muted mb-0">Dummy text of the printing and industry.</small>
+                                                    <h6 class="my-0 fw-normal text-dark fs-13">BTC PUMP Alert</h6>
+                                                    <small class="text-muted mb-0">Dummy text of the cryptocurrenct.</small>
                                                 </div><!--end media-body-->
                                             </div><!--end media-->
                                         </a><!--end-item-->
                                         <!-- item-->
+                                        <!-- item-->
                                         <a href="#" class="dropdown-item py-3">
-                                            <small class="float-end text-muted ps-2">10 min ago</small>
+                                            <small class="float-end text-muted ps-2">4 min ago</small>
                                             <div class="d-flex align-items-center">
                                                 <div class="flex-shrink-0 bg-primary-subtle text-primary thumb-md rounded-circle">
-                                                    <i class="iconoir-apple-swift fs-4"></i>
+                                                    <i class="iconoir-bell fs-4"></i>
                                                 </div>
                                                 <div class="flex-grow-1 ms-2 text-truncate">
-                                                    <h6 class="my-0 fw-normal text-dark fs-13">Meeting with designers</h6>
-                                                    <small class="text-muted mb-0">It is a long established fact that a reader.</small>
+                                                    <h6 class="my-0 fw-normal text-dark fs-13">ETH Volatility Alert</h6>
+                                                    <small class="text-muted mb-0">Dummy text of the cryptocurrenct.</small>
                                                 </div><!--end media-body-->
                                             </div><!--end media-->
                                         </a><!--end-item-->
                                         <!-- item-->
-                                        <a href="#" class="dropdown-item py-3">
-                                            <small class="float-end text-muted ps-2">40 min ago</small>
-                                            <div class="d-flex align-items-center">
-                                                <div class="flex-shrink-0 bg-primary-subtle text-primary thumb-md rounded-circle">                                                    
-                                                    <i class="iconoir-birthday-cake fs-4"></i>
-                                                </div>
-                                                <div class="flex-grow-1 ms-2 text-truncate">
-                                                    <h6 class="my-0 fw-normal text-dark fs-13">UX 3 Task complete.</h6>
-                                                    <small class="text-muted mb-0">Dummy text of the printing.</small>
-                                                </div><!--end media-body-->
-                                            </div><!--end media-->
-                                        </a><!--end-item-->
                                         <!-- item-->
                                         <a href="#" class="dropdown-item py-3">
-                                            <small class="float-end text-muted ps-2">1 hr ago</small>
+                                            <small class="float-end text-muted ps-2">15 min ago</small>
                                             <div class="d-flex align-items-center">
                                                 <div class="flex-shrink-0 bg-primary-subtle text-primary thumb-md rounded-circle">
-                                                    <i class="iconoir-drone fs-4"></i>
+                                                    <i class="iconoir-bell fs-4"></i>
                                                 </div>
                                                 <div class="flex-grow-1 ms-2 text-truncate">
-                                                    <h6 class="my-0 fw-normal text-dark fs-13">Your order is placed</h6>
-                                                    <small class="text-muted mb-0">It is a long established fact that a reader.</small>
+                                                    <h6 class="my-0 fw-normal text-dark fs-13">SOL DUMP Alert</h6>
+                                                    <small class="text-muted mb-0">Dummy text of the cryptocurrenct.</small>
                                                 </div><!--end media-body-->
                                             </div><!--end media-->
                                         </a><!--end-item-->
                                         <!-- item-->
-                                        <a href="#" class="dropdown-item py-3">
-                                            <small class="float-end text-muted ps-2">2 hrs ago</small>
-                                            <div class="d-flex align-items-center">
-                                                <div class="flex-shrink-0 bg-primary-subtle text-primary thumb-md rounded-circle">
-                                                    <i class="iconoir-user fs-4"></i>
-                                                </div>
-                                                <div class="flex-grow-1 ms-2 text-truncate">
-                                                    <h6 class="my-0 fw-normal text-dark fs-13">Payment Successfull</h6>
-                                                    <small class="text-muted mb-0">Dummy text of the printing.</small>
-                                                </div><!--end media-body-->
-                                            </div><!--end media-->
-                                        </a><!--end-item-->
                                     </div>
                                     <div class="tab-pane fade" id="Projects" role="tabpanel" aria-labelledby="projects-tab" tabindex="0">
-                                        <!-- item-->
+                                        <a href="#" class="dropdown-item py-3">
+                                            <small class="float-end text-muted ps-2">15 min ago</small>
+                                            <div class="d-flex align-items-center">
+                                                <div class="flex-shrink-0 bg-primary-subtle text-primary thumb-md rounded-circle">
+                                                    <i class="iconoir-bell fs-4"></i>
+                                                </div>
+                                                <div class="flex-grow-1 ms-2 text-truncate">
+                                                    <h6 class="my-0 fw-normal text-dark fs-13">SOL DUMP Alert</h6>
+                                                    <small class="text-muted mb-0">Dummy text of the cryptocurrenct.</small>
+                                                </div><!--end media-body-->
+                                            </div><!--end media-->
+                                        </a>
                                         <a href="#" class="dropdown-item py-3">
                                             <small class="float-end text-muted ps-2">40 min ago</small>
                                             <div class="d-flex align-items-center">
@@ -149,41 +137,27 @@
                                                     <i class="iconoir-birthday-cake fs-4"></i>
                                                 </div>
                                                 <div class="flex-grow-1 ms-2 text-truncate">
-                                                    <h6 class="my-0 fw-normal text-dark fs-13">UX 3 Task complete.</h6>
+                                                    <h6 class="my-0 fw-normal text-dark fs-13">Bitcoin Liquidation 10%.</h6>
                                                     <small class="text-muted mb-0">Dummy text of the printing.</small>
                                                 </div><!--end media-body-->
                                             </div><!--end media-->
-                                        </a><!--end-item-->
-                                        <!-- item-->
-                                        <a href="#" class="dropdown-item py-3">
-                                            <small class="float-end text-muted ps-2">1 hr ago</small>
-                                            <div class="d-flex align-items-center">
-                                                <div class="flex-shrink-0 bg-primary-subtle text-primary thumb-md rounded-circle">
-                                                    <i class="iconoir-drone fs-4"></i>
-                                                </div>
-                                                <div class="flex-grow-1 ms-2 text-truncate">
-                                                    <h6 class="my-0 fw-normal text-dark fs-13">Your order is placed</h6>
-                                                    <small class="text-muted mb-0">It is a long established fact that a reader.</small>
-                                                </div><!--end media-body-->
-                                            </div><!--end media-->
-                                        </a><!--end-item-->
-                                        <!-- item-->
-                                        <a href="#" class="dropdown-item py-3">
-                                            <small class="float-end text-muted ps-2">2 hrs ago</small>
-                                            <div class="d-flex align-items-center">
-                                                <div class="flex-shrink-0 bg-primary-subtle text-primary thumb-md rounded-circle">
-                                                    <i class="iconoir-user fs-4"></i>
-                                                </div>
-                                                <div class="flex-grow-1 ms-2 text-truncate">
-                                                    <h6 class="my-0 fw-normal text-dark fs-13">Payment Successfull</h6>
-                                                    <small class="text-muted mb-0">Dummy text of the printing.</small>
-                                                </div><!--end media-body-->
-                                            </div><!--end media-->
-                                        </a><!--end-item-->
+                                        </a>
                                     </div>
                                     <div class="tab-pane fade" id="Teams" role="tabpanel" aria-labelledby="teams-tab" tabindex="0">
                                         <!-- item-->
                                         <a href="#" class="dropdown-item py-3">
+                                            <small class="float-end text-muted ps-2">40 min ago</small>
+                                            <div class="d-flex align-items-center">
+                                                <div class="flex-shrink-0 bg-primary-subtle text-primary thumb-md rounded-circle">                                                    
+                                                    <i class="iconoir-birthday-cake fs-4"></i>
+                                                </div>
+                                                <div class="flex-grow-1 ms-2 text-truncate">
+                                                    <h6 class="my-0 fw-normal text-dark fs-13">Bitcoin Liquidation 10%.</h6>
+                                                    <small class="text-muted mb-0">Dummy text of the printing.</small>
+                                                </div><!--end media-body-->
+                                            </div><!--end media-->
+                                        </a>
+                                        {{-- <a href="#" class="dropdown-item py-3">
                                             <small class="float-end text-muted ps-2">1 hr ago</small>
                                             <div class="d-flex align-items-center">
                                                 <div class="flex-shrink-0 bg-primary-subtle text-primary thumb-md rounded-circle">
@@ -207,7 +181,7 @@
                                                     <small class="text-muted mb-0">Dummy text of the printing.</small>
                                                 </div><!--end media-body-->
                                             </div><!--end media-->
-                                        </a><!--end-item-->
+                                        </a><!--end-item--> --}}
                                     </div>
                                 </div>
                             

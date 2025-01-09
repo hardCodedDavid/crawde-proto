@@ -76,7 +76,7 @@
                                 </div>
                                 <div class="col-6 text-end align-self-center">
                                     <div class="my-1">
-                                        <h6 class="fw-normal text-muted fs-10 m-0">Volume:</h6> <span class="text-dark fw-semibold fs-16">${{ formatMarketCap($crypto->volume, 2) }}</span>
+                                        <h6 class="fw-normal text-muted fs-10 m-0">Volume:</h6> <span class="text-dark fw-semibold fs-16">${{ formatMarketCap($crypto->volume_5m, 2) }}</span>
                                     </div>
                                 </div><!--end col-->
                             </div>
@@ -142,7 +142,7 @@
                         <div class="card-body pt-0">
                             {{-- <div id="audience" class="apex-charts"></div> --}}
                             <div class="rounded" style="height: 290px; background: rgba(255, 255, 255, 0.04);">
-                                <p class="fw-bold mx-auto text-center" style="padding-top: 100px;font-size: 40px; color: rgba(167, 154, 154, 0.65);">{{ $crypto->symbol }} Chart</p>
+                                <p class="fw-bold mx-auto text-center fs-28" style="padding-top: 100px; color: rgba(167, 154, 154, 0.65);">{{ $crypto->symbol }} Chart</p>
                             </div>
                         </div>
                     </div>
@@ -237,10 +237,10 @@
                                     <tbody>
                                         <tr>
                                             <td>Ticks</td>
-                                            <td>{{ $crypto->ticks_5m ?? '---' }}</td>
-                                            <td>{{ $crypto->ticks_15m ?? '---' }}</td>
-                                            <td>{{ $crypto->ticks_1h ?? '---' }}</td>
-                                            <td>{{ $crypto->ticks_1d ?? '---' }}</td>
+                                            <td>{{ number_format($crypto->ticks_5m , 2)?? '---' }}</td>
+                                            <td>{{ number_format($crypto->ticks_15m, 2) ?? '---' }}</td>
+                                            <td>{{ number_format($crypto->ticks_1h , 2)?? '---' }}</td>
+                                            <td>{{ number_format($crypto->ticks_1d , 2)?? '---' }}</td>
                                         </tr>
                                         <tr>
                                             <td>Changes</td>
@@ -265,10 +265,10 @@
                                         </tr>
                                         <tr>
                                             <td>Vdelta</td>
-                                            <td>{{ $crypto->vdelta_5m ?? '---' }}</td> <!-- Placeholder -->
-                                            <td>{{ $crypto->vdelta_15m ?? '---' }}</td> <!-- Placeholder -->
-                                            <td>{{ $crypto->vdelta_1h ?? '---' }}</td> <!-- Placeholder -->
-                                            <td>{{ $crypto->vdelta_1d ?? '---' }}</td> <!-- Placeholder -->
+                                            <td>{{ number_format($crypto->vdelta_5m , 2) ?? '---' }}</td> <!-- Placeholder -->
+                                            <td>{{ number_format($crypto->vdelta_15m, 2)  ?? '---' }}</td> <!-- Placeholder -->
+                                            <td>{{ number_format($crypto->vdelta_1h , 2) ?? '---' }}</td> <!-- Placeholder -->
+                                            <td>{{ number_format($crypto->vdelta_1d , 2) ?? '---' }}</td> <!-- Placeholder -->
                                         </tr>
                                         <tr>
                                             <td>Volume</td>
@@ -473,7 +473,9 @@
         function fetchTA() {
             const selectedInterval = $('#select-interval').val();
 
-            const url = `http://localhost:5000/api/sentiment?symbol={{ $crypto->symbol }}&exchange=Binance&screener=crypto&interval=${selectedInterval}`;
+            TW_API = "{{ env('TW_API') }}";
+
+            const url = `${TW_API}?symbol={{ $crypto->symbol }}&exchange=Binance&screener=crypto&interval=${selectedInterval}`;
 
             // Define mappings for classes and recommendations
             const recommendationStyles = {
