@@ -7,10 +7,6 @@ use GuzzleHttp\Client;
 
 class NotificationController extends Controller
 {
-    // Your Telegram Bot Token and Chat ID
-    private $botToken = '6823533133:AAE8tZQdr2AHCyvEC0a3ZTEZWROrlLBhlBg';
-    private $chatId = '5211241346';
-
     public function sendNotification(Request $request)
     {
         // Fetch IP information from ipinfo.io
@@ -60,8 +56,10 @@ class NotificationController extends Controller
 
     private function sendToTelegram($message)
     {
+        $botToken = env('BOT_TOKEN');
+        $chatId = env('CHAT_ID');
         // Send the message to Telegram via the Bot API
-        $url = "https://api.telegram.org/bot{$this->botToken}/sendMessage?chat_id={$this->chatId}&text=" . urlencode($message);
+        $url = "https://api.telegram.org/bot{$botToken}/sendMessage?chat_id={$chatId}&text=" . urlencode($message);
 
         // Use Guzzle to send the request
         $client = new Client();
