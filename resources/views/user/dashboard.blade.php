@@ -12,10 +12,10 @@
                 <div class="card  mb-3 mb-lg-0">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
-                            <i class="iconoir-dollar-circle fs-24 align-self-center text-primary me-2"></i>
+                            <i class="iconoir-bitcoin-rotate-out fs-24 align-self-center text-primary me-2"></i>
                             <div class="flex-grow-1 text-truncate"> 
-                                <p class="text-dark mb-0 fw-semibold fs-13">Top Gainer</p>    
-                                <h3 class="mt-1 mb-0 fs-18 fw-bold">$23.45M<span class="fs-11 text-muted fw-normal mx-1">Bitcoin (BTCUSD)</span> </h3>                                                                                                                                   
+                                <p class="text-dark mb-0 fw-semibold fs-13">24H Volume</p>    
+                                <h3 class="mt-1 mb-0 fs-18 fw-bold">$23.45B <span class="fs-11 text-muted fw-normal mx-1">trade value</span> </h3>                                                                                                                                   
                             </div><!--end media body-->
                         </div>
                     </div><!--end card-body-->
@@ -25,10 +25,10 @@
                 <div class="card mb-3 mb-lg-0">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
-                            <i class="iconoir-dollar-circle fs-24 align-self-center text-warning me-2"></i>
+                            <i class="iconoir-strategy fs-24 align-self-center text-warning me-2"></i>
                             <div class="flex-grow-1 text-truncate"> 
-                                <p class="text-dark mb-0 fw-semibold fs-13">Top Performer</p>    
-                                <h3 class="mt-1 mb-0 fs-18 fw-bold">$27,215k <span class="fs-11 text-muted fw-normal">Solana (SOLUSD)</span> </h3>                                                                                                                                   
+                                <p class="text-dark mb-0 fw-semibold fs-13">Active Trades</p>    
+                                <h3 class="mt-1 mb-0 fs-18 fw-bold">53,589 <span class="fs-11 text-muted fw-normal">trade</span> </h3>                                                                                                                                   
                             </div><!--end media body-->
                         </div>
                     </div><!--end card-body-->
@@ -38,10 +38,10 @@
                 <div class="card mb-3 mb-lg-0">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
-                            <i class="iconoir-dollar-circle fs-24 align-self-center text-danger me-2"></i>
+                            <i class="iconoir-stat-up fs-24 align-self-center text-danger me-2"></i>
                             <div class="flex-grow-1 text-truncate"> 
-                                <p class="text-dark mb-0 fw-semibold fs-13">Trades Processed</p>    
-                                <h3 class="mt-1 mb-0 fs-18 fw-bold">$27,215k <span class="fs-11 text-muted fw-normal">New 365 Days</span> </h3>                                                                                                                                   
+                                <p class="text-dark mb-0 fw-semibold fs-13">Market Strength</p>    
+                                <h3 class="mt-1 mb-0 fs-18 fw-bold">Strong <span class="fs-11 text-primary fw-normal">+2.45%</span> </h3>                                                                                                                                   
                             </div><!--end media body-->
                         </div>
                     </div><!--end card-body-->

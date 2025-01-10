@@ -36,19 +36,25 @@
                                         </div><!--end media body-->
                                     </div>
                                     <div class="row mx-md-3 mt-3 mt-md-0 w-100">
-                                        <div class="col-md-3 col-4">
+                                        <div class="col-md-2 col-4">
                                             <div class="text-md-center">
                                                 <p class="text-muted">Actual</p>
-                                                <h6 class="m-0 mb-1 fw-semibold">{{ number_format($event->actual, 2) | "---" }}</h6>
+                                                <h6 class="m-0 mb-1 fw-semibold">{{ number_format($event->actual, 2) }}</h6>
                                             </div>
                                         </div>
-                                        <div class="col-md-3 col-4">
+                                        <div class="col-md-2 col-4">
+                                            <div class="text-md-center">
+                                                <p class="text-muted">Estimate</p>
+                                                <h6 class="m-0 mb-1 fw-semibold">{{ number_format($event->estimate, 2) }}%</h6>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-4">
                                             <div class="text-md-center">
                                                 <p class="text-muted">Previous</p>
-                                                <h6 class="m-0 mb-1 fw-semibold">{{ number_format($event->previous, 2) }}</h6>
+                                                <h6 class="m-0 mb-1 fw-semibold">{{ number_format($event->previous, 2) }}{{ $event->unit }}</h6>
                                             </div>
                                         </div>
-                                        <div class="col-md-3 col-4">
+                                        <div class="col-md-2 col-4">
                                             <div class="text-md-center">
                                                 <p class="text-muted">Priority</p>
                                                 @if($event->impact == 'High')
@@ -66,7 +72,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="col-md-3 col-12">
+                                        <div class="col-md-3 col-4">
                                             <div class="text-md-end">
                                                 <p class="text-muted">Status</p>
                                                 <span id="ta-buy" class="badge rounded text-secondary bg-secondary-subtle btn-lg fw-bold mt-0 py-1">
