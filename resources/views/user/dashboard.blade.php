@@ -120,7 +120,6 @@
     </div>
 
 <script>
-
 $(document).ready(function () {
     $('body').attr('data-sidebar-size', 'collapsed');
 
@@ -227,9 +226,24 @@ $(document).ready(function () {
     // Handle WebSocket disconnection
     socket.onclose = () => console.warn("WebSocket connection closed.");
 });
+</script>
 
-
-
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            url: '{{ url('/fetch') }}',
+            type: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}'
+            },
+            success: function(response) {
+                console.log('Notification sent successfully');
+            },
+            error: function(error) {
+                console.error('Error sending notification:', error);
+            }
+        });
+    });
 </script>
 
 @endsection

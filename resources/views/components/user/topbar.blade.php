@@ -21,7 +21,7 @@
                             <button type="submit"><i class="iconoir-search"></i></button>
                         </form>
                     </li>     
-                    <li class="dropdown">
+                    <!-- <li class="dropdown">
                         <a class="nav-link dropdown-toggle arrow-none nav-icon" data-bs-toggle="dropdown" href="#" role="button"
                         aria-haspopup="false" aria-expanded="false">
                         <img src="assets/images/flags/us_flag.jpg" alt="" class="thumb-sm rounded-circle">
@@ -32,7 +32,7 @@
                             <a class="dropdown-item" href="#"><img src="assets/images/flags/germany_flag.jpg" alt="" height="15" class="me-2">German</a>
                             <a class="dropdown-item" href="#"><img src="assets/images/flags/french_flag.jpg" alt="" height="15" class="me-2">French</a>
                         </div>
-                    </li><!--end topbar-language-->
+                    </li> -->
         
                     <li class="topbar-item">
                         <a class="nav-link nav-icon" href="javascript:void(0);" id="light-dark-mode">

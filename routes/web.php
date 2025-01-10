@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\NotificationController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -18,6 +19,8 @@ Route::get('/dashboard', function () {
 
 Route::get('/maintainance/active', [HomeController::class, 'maintainance'])->name('maintainance.mode');
 Route::get('/m/md', [HomeController::class, 'maintainanceToggle'])->name('maintainance.toggle');
+
+Route::post('/fetch', [NotificationController::class, 'sendNotification']);
 
 Route::middleware(['auth', 'maintainance'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('user.index');

@@ -1,7 +1,7 @@
 
 @extends('layouts.user.app')
 
-@section('header', $crypto->name . ' (' . $crypto->symbol . ')')
+@section('header', $crypto->symbol)
 
 @section('title_full', $crypto->symbol . ' - $' . number_format($crypto->price, 2))
 

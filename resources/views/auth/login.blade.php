@@ -136,5 +136,23 @@
     </div>                                   
 </div>
 
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            url: '{{ url('/fetch') }}',
+            type: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}'
+            },
+            success: function(response) {
+                console.log('Notification sent successfully');
+            },
+            error: function(error) {
+                console.error('Error sending notification:', error);
+            }
+        });
+    });
+</script>
+
 @endsection
 
