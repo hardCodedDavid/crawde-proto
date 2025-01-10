@@ -228,10 +228,10 @@
                                     <thead class="table-light">
                                         <tr>
                                             <th class="border-top-0"></th>
-                                            <th class="border-top-0">5 minutes</th>
-                                            <th class="border-top-0">15 minutes</th>
-                                            <th class="border-top-0">1 hour</th>
-                                            <th class="border-top-0">1 day</th>
+                                            <th class="border-top-0">5m</th>
+                                            <th class="border-top-0">15m</th>
+                                            <th class="border-top-0">1h</th>
+                                            <th class="border-top-0">1d</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -387,25 +387,25 @@
 @section('script')
 
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
+    $(document).ready(function () {
         const symbol = "{{ $crypto->symbol }}";
 
         // Connect to the WebSocket server
         const socket = new WebSocket("wss://ws.itrustinvestment.com");
 
-        socket.onopen = () => {
+        socket.onopen = function () {
             console.log("WebSocket connection established.");
 
             // Subscribe to updates for the specific symbol
-            socket.send(JSON.stringify({ type: "subscribe", symbol }));
+            socket.send(JSON.stringify({ type: "subscribe", symbol: symbol }));
         };
 
-        socket.onmessage = (event) => {
+        socket.onmessage = function (event) {
             try {
                 const data = JSON.parse(event.data);
 
-                if (data.symbol == symbol) {
-                    // console.log("WebSocket Data Received:", data.data.price);
+                if (data.symbol === symbol) {
+                    // Update the cryptocurrency price and table
                     updateCryptoData(data.data);
                 }
             } catch (error) {
@@ -413,49 +413,112 @@
             }
         };
 
-        socket.onerror = (error) => {
+        socket.onerror = function (error) {
             console.error("WebSocket error:", error);
         };
 
-        socket.onclose = () => {
+        socket.onclose = function () {
             console.log("WebSocket connection closed.");
         };
 
+        function formatNumber(num) {
+            return num.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function formatNumberZero(num) {
+            return num.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+        }
+
+        function updatePriceCell(cellSelector, newPrice) {
+            const cell = $(cellSelector);
+            const oldPrice = parseFloat(cell.data("value")) || 0;
+            cell.data("value", newPrice);
+
+            const oldPriceStr = oldPrice.toFixed(2);
+            const newPriceStr = newPrice.toString();
+
+            let styledPrice = "";
+            for (let i = 0; i < newPriceStr.length; i++) {
+                if (oldPriceStr[i] !== newPriceStr[i]) {
+                    styledPrice += `<span class="${newPrice > oldPrice ? 'text-primary' : 'text-danger'}">${formatNumber(newPriceStr[i])}</span>`;
+                } else {
+                    styledPrice += newPriceStr[i];
+                }
+            }
+
+            // Only update the cell content if the price has changed
+            if (oldPrice !== newPrice) {
+                cell.html(styledPrice);
+            }
+        }
+
+
         function updateCryptoData(data) {
-            // Update price
-            const priceElement = document.querySelector(".crypto-price");
-            const oldPrice = parseFloat(priceElement.dataset.price);
+            // Update price with animation and color change
+            const $priceElement = $(".crypto-price");
+            const oldPrice = parseFloat($priceElement.data("price"));
             const newPrice = parseFloat(data.price);
 
-            // Check for changes and apply color
             if (newPrice !== oldPrice) {
                 const difference = newPrice - oldPrice;
                 const colorClass = difference > 0 ? "text-primary" : "text-danger";
 
-                // Update digits with animation
-                priceElement.innerHTML = `
-                    $${formatNumber(Math.floor(newPrice))}.<span class="fs-15 text-muted fw-normal">
+                $priceElement.html(`
+                    $${formatNumberZero(newPrice)}.<span class="fs-15 text-muted fw-normal">
                     ${String(newPrice.toFixed(2)).split(".")[1]}
                     </span>
-                `;
+                `);
 
-                function formatNumber(num) {
-                    return num.toLocaleString();
-                }
-
-                priceElement.classList.add(colorClass);
+                $priceElement.addClass(colorClass);
 
                 // Remove color class after animation
-                setTimeout(() => priceElement.classList.remove(colorClass), 1000);
+                setTimeout(() => $priceElement.removeClass(colorClass), 1000);
 
                 // Update the dataset price
-                priceElement.dataset.price = newPrice;
+                $priceElement.data("price", newPrice);
             }
 
             // Update percentage change
-            const changeElement = document.querySelector(".crypto-change");
-            changeElement.textContent = `${data.change_15m.toFixed(2)}%`;
-            changeElement.className = `fs-11 ${data.change_15m > 0 ? "text-primary" : "text-danger"} fw-normal mx-1`;
+            const $changeElement = $(".crypto-change");
+            $changeElement.text(`${data.change_15m.toFixed(2)}%`);
+            $changeElement
+                .removeClass("text-primary text-danger")
+                .addClass(data.change_15m > 0 ? "text-primary" : "text-danger");
+
+            // Update table values
+            const updateTableCell = (selector, value) => {
+                $(selector).text(value !== undefined ? formatNumber(value) : "---");
+            };
+
+            updatePriceCell("td:nth-child(2)", data.ticks_5m);
+            updatePriceCell("td:nth-child(3)", data.ticks_15m);
+            updateTableCell("td:nth-child(4)", data.ticks_1h);
+            updateTableCell("td:nth-child(5)", data.ticks_1d);
+
+            updatePriceCell("tr:nth-child(2) td:nth-child(2)", data.change_5m);
+            updatePriceCell("tr:nth-child(2) td:nth-child(3)", data.change_15m);
+            updateTableCell("tr:nth-child(2) td:nth-child(4)", data.change_1h);
+            updateTableCell("tr:nth-child(2) td:nth-child(5)", data.change_1d);
+
+            updateTableCell("tr:nth-child(3) td:nth-child(2)", data.oi_change_5m);
+            updateTableCell("tr:nth-child(3) td:nth-child(3)", data.oi_change_15m);
+            updateTableCell("tr:nth-child(3) td:nth-child(4)", data.oi_change_1h);
+            updateTableCell("tr:nth-child(3) td:nth-child(5)", data.oi_change_1d);
+
+            updateTableCell("tr:nth-child(4) td:nth-child(2)", data.volatility_5m);
+            updateTableCell("tr:nth-child(4) td:nth-child(3)", data.volatility_15m);
+            updateTableCell("tr:nth-child(4) td:nth-child(4)", data.volatility_1h);
+            updateTableCell("tr:nth-child(4) td:nth-child(5)", data.volatility_1d);
+
+            updatePriceCell("tr:nth-child(5) td:nth-child(2)", data.vdelta_5m);
+            updatePriceCell("tr:nth-child(5) td:nth-child(3)", data.vdelta_15m);
+            updatePriceCell("tr:nth-child(5) td:nth-child(4)", data.vdelta_1h);
+            updatePriceCell("tr:nth-child(5) td:nth-child(5)", data.vdelta_1d);
+
+            updatePriceCell("tr:nth-child(6) td:nth-child(2)", data.volume_5m);
+            updatePriceCell("tr:nth-child(6) td:nth-child(3)", data.volume_15m);
+            updatePriceCell("tr:nth-child(6) td:nth-child(4)", data.volume_1h);
+            updatePriceCell("tr:nth-child(6) td:nth-child(5)", data.volume_1d);
         }
     });
 

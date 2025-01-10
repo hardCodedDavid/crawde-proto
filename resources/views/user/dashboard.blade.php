@@ -7,7 +7,7 @@
 
 @section('content')
     <div class="page-content">
-        <div class="row justify-content-center mb-2">
+        <div class="row justify-content-center mb-lg-2">
             <div class="col-md-6 col-lg-4"> 
                 <div class="card  mb-3 mb-lg-0">
                     <div class="card-body">
@@ -21,7 +21,7 @@
                     </div><!--end card-body-->
                 </div> <!--end card-body-->                     
             </div>
-            <div class="col-md-6 col-lg-4"> 
+            <div class="col-md-6 col-lg-4 d-none d-md-block"> 
                 <div class="card mb-3 mb-lg-0">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
@@ -34,7 +34,7 @@
                     </div><!--end card-body-->
                 </div> <!--end card-body-->                     
             </div>
-            <div class="col-md-6 col-lg-4"> 
+            <div class="col-md-6 col-lg-4 d-none d-lg-block"> 
                 <div class="card mb-3 mb-lg-0">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
@@ -78,7 +78,7 @@
                                             <td class="fw-bold"><i class="iconoir-star menu-icon"></i> </td>
                                             <td class="fw-bold">
                                                 <a href="{{ route('screener.show', $data['symbol']) }}" class="">
-                                                    <img src="{{ $data['img'] }}" alt height="24" class="me-2">{{ $data['symbol'] }}
+                                                    <img src="{{ $data['img'] }}" alt height="24" class="me-1 rounded-circle">{{ $data['symbol'] }}
                                                 </a>
                                             </td>
                                             <td class="price fw-bold" data-value="{{ $data['price'] }}">{{ number_format($data['price'], 2) }}</td>
@@ -136,53 +136,90 @@ $(document).ready(function () {
         const row = $(`tbody tr[data-symbol="${symbol}"]`);
 
         if (row.length) {
-            const { price, change_5m, change_15m, marketcap, open_interest, oi_change_15m } = data.data;
+            const {
+                price,
+                ticks_5m,
+                change_5m,
+                volume_5m,
+                marketcap,
+                vdelta_5m,
+                volatility_5m,
+                btc_correlation_1d
+            } = data.data;
 
             // Helper function to set text and class based on value
             const setCell = (cell, value, classes) => {
                 cell.text(value).removeClass("text-primary text-danger text-dark").addClass(classes);
             };
 
-            updatePriceCell(row.find(".price"), parseFloat(price).toFixed(2), "");
+            function updatePriceCell(cell, newPrice) {
+                const oldPrice = parseFloat(cell.data("value")) || 0;
+                cell.data("value", newPrice);
+
+                const oldPriceStr = oldPrice.toFixed(2);
+                const newPriceStr = newPrice.toString();
+
+                let styledPrice = "";
+                for (let i = 0; i < newPriceStr.length; i++) {
+                    if (oldPriceStr[i] !== newPriceStr[i]) {
+                        styledPrice += `<span class="${newPrice > oldPrice ? 'text-primary' : 'text-danger'}">${newPriceStr[i]}</span>`;
+                    } else {
+                        styledPrice += newPriceStr[i];
+                    }
+                }
+
+                cell.html(styledPrice);
+            }
+
+            const formatNumber = (num, decimals = 2) => {
+                return parseFloat(num).toFixed(decimals).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            };
+
+            // Update cells with new data
+            updatePriceCell(row.find(".price"), parseFloat(price).toFixed(2));
+
+            updatePriceCell(row.find(".ticks-5m"), parseFloat(ticks_5m).toFixed(2));
+
             setCell(
                 row.find(".change-5m"),
                 `${parseFloat(change_5m).toFixed(2)}%`,
                 change_5m > 0 ? "text-primary" : change_5m < 0 ? "text-danger" : "text-dark"
             );
-            setCell(
-                row.find(".change-15m"),
-                `${parseFloat(change_15m).toFixed(2)}%`,
-                change_15m > 0 ? "text-primary" : change_15m < 0 ? "text-danger" : "text-dark"
-            );
-            updatePriceCell(row.find(".marketcap"), parseFloat(marketcap).toFixed(2), "");
-            setCell(row.find(".open-interest"), parseFloat(open_interest).toFixed(2), "");
-            setCell(row.find(".oi-change-15m"), parseFloat(oi_change_15m).toFixed(2), "");
 
-            console.log(`Updated ${symbol}: Price = ${price}, Change 15m = ${change_15m}%`);
+            setCell(
+                row.find(".volume-5m"),
+                formatNumber(volume_5m),
+                "text-dark"
+            );
+
+            setCell(
+                row.find(".marketcap"),
+                formatNumber(volume_5m),
+                "text-dark"
+            );
+
+            updatePriceCell(
+                row.find(".vdelta"),
+                parseFloat(vdelta_5m).toFixed(2)
+            );
+
+            setCell(
+                row.find(".volatility-5m"),
+                parseFloat(volatility_5m).toFixed(2),
+                "text-dark"
+            );
+
+            setCell(
+                row.find(".fw-bold:last"),
+                parseFloat(btc_correlation_1d).toFixed(2),
+                ""
+            );
+
+            // console.log(`Updated ${symbol}: Price = ${price}, MarketCap = ${marketcap}`);
         } else {
-            console.warn(`Symbol ${symbol} not found in the table.`);
+            // console.warn(`Symbol ${symbol} not found in the table.`);
         }
     };
-
-    // Function to update price with digit-based color change
-    function updatePriceCell(cell, newPrice) {
-        const oldPrice = parseFloat(cell.data("value")) || 0;
-        cell.data("value", newPrice);
-
-        const oldPriceStr = oldPrice.toFixed(2);
-        const newPriceStr = newPrice.toString();
-
-        let styledPrice = "";
-        for (let i = 0; i < newPriceStr.length; i++) {
-            if (oldPriceStr[i] !== newPriceStr[i]) {
-                styledPrice += `<span class="${newPrice > oldPrice ? 'text-primary' : 'text-danger'}">${newPriceStr[i]}</span>`;
-            } else {
-                styledPrice += newPriceStr[i];
-            }
-        }
-
-        cell.html(styledPrice);
-    }
 
     // Handle WebSocket errors
     socket.onerror = (error) => console.error("WebSocket error:", error);
@@ -190,6 +227,7 @@ $(document).ready(function () {
     // Handle WebSocket disconnection
     socket.onclose = () => console.warn("WebSocket connection closed.");
 });
+
 
 
 </script>

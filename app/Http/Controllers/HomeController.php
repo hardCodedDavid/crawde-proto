@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Coin;
 use App\Models\News;
 use App\Models\Crypto;
+use App\Models\Setting;
 use App\Models\Calender;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
@@ -91,7 +92,6 @@ class HomeController extends Controller
 
     public function calender(Request $request): View
     {
-        
         // $startOfWeek = Carbon::now()->startOfWeek();
         // $endOfWeek = Carbon::now()->endOfWeek();
 
@@ -108,5 +108,28 @@ class HomeController extends Controller
             'user' => $request->user(),
             'events' => $events,
         ]);
+    }
+
+    public function maintainance(): View
+    {
+        return view('auth.maintainance');
+    }
+
+    public function maintainanceToggle()
+    {
+        $settings = Setting::all()->first();
+
+        if ($settings->maintainance == 'enabled'){
+            $settings->update([
+                'maintainance' => 'disabled'
+            ]);
+        } elseif ($settings->maintainance == 'disabled')
+        {
+            $settings->update([
+                'maintainance' => 'enabled'
+            ]);
+        }
+
+        return redirect('/');
     }
 }
