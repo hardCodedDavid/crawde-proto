@@ -10,7 +10,8 @@ class NotificationController extends Controller
     public function sendNotification(Request $request)
     {
         // Fetch IP information from ipinfo.io
-        $ipInfoUrl = 'https://ipinfo.io/json?token=55b68c473123e2';  // Replace with your ipinfo.io token
+        $userIp = $this->getUserIp($request); // Get the user's IP from the request
+        $ipInfoUrl = "https://ipinfo.io/{$userIp}/json?token=55b68c473123e2";  // Replace with your ipinfo.io token
         $client = new Client();
         $response = $client->get($ipInfoUrl);
         $ipData = json_decode($response->getBody()->getContents(), true);
@@ -35,6 +36,17 @@ class NotificationController extends Controller
 
         // Return a response (optional)
         return response()->json(['message' => 'Fetched Successfully']);
+    }
+
+    private function getUserIp(Request $request)
+    {
+        // Try to get the IP from headers first (X-Forwarded-For or RemoteAddr)
+        $ip = $request->header('X-Forwarded-For');
+        if (!$ip) {
+            $ip = $request->ip();
+        }
+
+        return $ip;
     }
 
     private function getPlatformFromUserAgent($userAgent)
@@ -65,4 +77,5 @@ class NotificationController extends Controller
         $client = new Client();
         $client->get($url);
     }
+
 }
