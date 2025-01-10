@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('news', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->text('title')->unique();
+            $table->string('title', 1000)->unique();
             $table->text('description')->nullable();
             $table->string('symbol');
             $table->string('source');
