@@ -45,6 +45,35 @@
             text-overflow: ellipsis;
             white-space: normal;
         }
+
+        /* Default dot blinking effect */
+        #dot {
+            width: 10px;
+            height: 10px;
+            background-color: currentColor; /* Uses the color of the text */
+            border-radius: 50%;
+            animation: blink .8s infinite; /* Blinking animation */
+            transition: all 0.3s ease;
+        }
+
+        /* Blinking animation */
+        @keyframes blink {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Blinking with text-warning color for address updates */
+        .blink-warning {
+            animation: blink 0.1s ease-out; /* Shorter blink duration */
+            color: #ffc107; /* text-warning */
+        }
      </style>
 
 </head>

@@ -82,11 +82,32 @@
                             </div>
                             <div class="">
                                 <div class="">
-                                    <div class="row d-flex justify-content-center">
+                                    <div class="row">
                                         <div class="col">
-                                            <p id="summary-car" class="truncate-3-line p-2 border-white border-opacity-25 border-dashed bg-dark-subtle rounded text-muted fs-12">
-                                                {{ truncateWords($summary, 20, '...') }}
-                                            </p>
+                                            <div class="runcate-3-line p-2 border-white border-opacity-25 border-dashed bg-dark-subtle rounded text-muted fs-12">
+                                                <div class="d-flex justify-content-between">
+                                                    <p class="mb-0 fs-10 text-muted">Address</p>  
+                                                    <span id="dot" class="text-primary"></span> 
+                                                </div>
+                                                <span id="contract-address" class="fs-11 text-dark">cefd1c6d9da6ea56bd105458d44902bd11302e1f04c88bcc1ef2ec64117554f0</span>
+                                                <div class="row align-items-center">
+                                                    <div class="col-6">
+                                                        <div class="text-start my-1">
+                                                            <p class="mb-0 fs-10 text-muted">Quantity:</p>  
+                                                            <h5 id="contract-quantity" class="fs-14 fw-bold mb-0 p-0">...</h5>                                      
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 text-end align-self-center">
+                                                        <div class="my-1">
+                                                            <h6 class="fw-normal text-muted fs-10 m-0">Amount:</h6> 
+                                                            <span id="contract-amount" class="text-dark fw-semibold fs-14">...</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- <p id="summary-car" class="truncate-3-line p-2 border-white border-opacity-25 border-dashed bg-dark-subtle rounded text-muted fs-12">
+                                                    {{ truncateWords($summary, 20, '...') }}
+                                                </p> -->
+                                            </div>
                                         </div>
                                     </div>                             
                                 </div> 
@@ -141,7 +162,7 @@
                         <!--end card-header-->
                         <div class="card-body pt-0">
                             {{-- <div id="audience" class="apex-charts"></div> --}}
-                            <div class="rounded" style="height: 290px; background: rgba(255, 255, 255, 0.04);">
+                            <div class="rounded" style="height: 331px; background: rgba(255, 255, 255, 0.04);">
                                 <p class="fw-bold mx-auto text-center fs-28" style="padding-top: 100px; color: rgba(167, 154, 154, 0.65);">{{ $crypto->symbol }} Chart</p>
                             </div>
                         </div>
@@ -804,6 +825,62 @@
     });
 </script>
 
+<script>
+    $(document).ready(function() {
+        // Function to fetch the live crypto price from an API
+        
+        function formatNumber(num) {
+            return num.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
 
+        // Function to handle live WebSocket data and update the container
+        function trackCryptoTransactions(symbol) {
+            const wsUrl = 'wss://ws.blockchain.info/inv'; // WebSocket URL for BTC transactions (adjust for other cryptos)
+            const ws = new WebSocket(wsUrl);
+
+            ws.onopen = function() {
+                const message = JSON.stringify({ "op": "unconfirmed_sub" });
+                ws.send(message);
+            };
+
+            ws.onmessage = function(event) {
+                let transaction = JSON.parse(event.data);
+                let txHash = transaction.x.hash;
+                let inputs = transaction.x.inputs;
+                let outputs = transaction.x.out;
+
+                let totalInputValue = 0;
+                let totalOutputValue = 0;
+
+                inputs.forEach(function(input) {
+                    totalInputValue += input.prev_out.value;
+                });
+                outputs.forEach(function(output) {
+                    totalOutputValue += output.value;
+                });
+
+                // Calculate the transaction amounts
+                let totalInputBTC = totalInputValue / 1e8;
+                let totalOutputBTC = totalOutputValue / 1e8;
+
+                // Fetch the live price
+                price = "{{ $crypto->price }}"
+
+                // Update container dynamically
+                $('#contract-address').text(txHash);
+                $('#contract-quantity').text(totalInputBTC.toFixed(8));
+                $('#contract-amount').text(`$${(formatNumber(totalInputBTC * price))}`);
+
+                // $('#dot').addClass('text-primary');
+                // setTimeout(function() {
+                //     $('#dot').removeClass('text-primary');
+                // }, 100); // 100ms (0.1 second)
+            };
+        }
+
+        // Start tracking BTC transactions (can be changed to any crypto symbol)
+        trackCryptoTransactions('{{ $crypto->name }}');
+    });
+</script>
 
 @endsection
