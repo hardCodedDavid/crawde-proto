@@ -5,6 +5,8 @@
 
 @section('content')
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <div class="container-xxl">
     <div class="row vh-100 d-flex justify-content-center">
         <div class="col-12 align-self-center">
